@@ -33,10 +33,6 @@ button {
     display: block;
 }
 
-button:active {
-    transform: scale(0.97);
-}
-
 .alarm {
     background: #d71920;
 }
@@ -78,64 +74,62 @@ button:active {
 Gotowy do wysłania.
 </div>
 
+<iframe name="ntfyFrame" style="display:none;"></iframe>
+
+<form id="ntfyForm"
+      action="https://ntfy.sh/Cholerzyn-Kr2"
+      method="POST"
+      target="ntfyFrame"
+      style="display:none;">
+
+    <input type="hidden" name="title" value="CHOLERZYN — AUDYT BHP">
+    <input type="hidden" name="priority" value="5">
+    <input type="hidden" name="tags" value="rotating_light">
+    <input type="hidden" name="message" id="message">
+
+</form>
+
 <script>
 
-const TOPIC = "Cholerzyn-Kr2";
+function send(message, priority, tag) {
 
-async function sendMessage(message, priority) {
+    document.getElementById("message").value = message;
 
-    const status = document.getElementById("status");
+    document.getElementById("ntfyForm").priority.value = priority;
+    document.getElementById("ntfyForm").tags.value = tag;
 
-    status.innerText = "⏳ Wysyłanie...";
+    document.getElementById("status").innerText =
+        "⏳ Wysyłanie...";
 
-    try {
+    document.getElementById("ntfyForm").submit();
 
-        const response = await fetch("https://ntfy.sh/" + TOPIC, {
-            method: "POST",
-
-            headers: {
-                "Title": "CHOLERZYN — AUDYT BHP",
-                "Priority": priority,
-                "Tags": "rotating_light"
-            },
-
-            body: message
-        });
-
-        if (!response.ok) {
-            throw new Error("Błąd HTTP " + response.status);
-        }
-
-        status.innerText = "✅ WYSŁANO: " + message;
-
-    } catch (error) {
-
-        status.innerText =
-            "❌ BŁĄD WYSYŁANIA: " + error.message;
-    }
+    setTimeout(function() {
+        document.getElementById("status").innerText =
+            "✅ Komunikat wysłany";
+    }, 1000);
 }
 
 function sendAlarm() {
-
-    sendMessage(
+    send(
         "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
-        "5"
+        "5",
+        "rotating_light"
     );
 }
 
 function sendImportant() {
-
-    sendMessage(
+    send(
         "⚠️ WAŻNY KOMUNIKAT BHP",
-        "4"
+        "4",
+        "warning"
     );
 }
 
 function sendInfo() {
-
-    sendMessage(
+    send(
         "ℹ️ INFORMACJA BHP",
-        "3"
+        "3",
+        "information_source"
     );
 }
 
