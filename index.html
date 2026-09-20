@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Cholerzyn — Audyt BHP</title>
 
 <style>
@@ -15,6 +16,7 @@ body {
 }
 
 h1 {
+    font-size: 26px;
     margin-bottom: 30px;
 }
 
@@ -31,6 +33,10 @@ button {
     display: block;
 }
 
+button:active {
+    transform: scale(0.97);
+}
+
 .alarm {
     background: #d71920;
 }
@@ -42,6 +48,13 @@ button {
 .info {
     background: #2878d0;
 }
+
+#status {
+    margin-top: 25px;
+    padding: 15px;
+    background: #222;
+    border-radius: 10px;
+}
 </style>
 </head>
 
@@ -49,17 +62,84 @@ button {
 
 <h1>🚨 CHOLERZYN — AUDYT BHP</h1>
 
-<button class="alarm">
+<button class="alarm" onclick="sendAlarm()">
 🚨 ALARM BHP
 </button>
 
-<button class="important">
+<button class="important" onclick="sendImportant()">
 ⚠️ WAŻNE
 </button>
 
-<button class="info">
+<button class="info" onclick="sendInfo()">
 ℹ️ INFORMACJA
 </button>
+
+<div id="status">
+Gotowy do wysłania.
+</div>
+
+<script>
+
+const TOPIC = "Cholerzyn-Kr2";
+
+async function sendMessage(message, priority) {
+
+    const status = document.getElementById("status");
+
+    status.innerText = "⏳ Wysyłanie...";
+
+    try {
+
+        const response = await fetch("https://ntfy.sh/" + TOPIC, {
+            method: "POST",
+
+            headers: {
+                "Title": "CHOLERZYN — AUDYT BHP",
+                "Priority": priority,
+                "Tags": "rotating_light"
+            },
+
+            body: message
+        });
+
+        if (!response.ok) {
+            throw new Error("Błąd HTTP " + response.status);
+        }
+
+        status.innerText = "✅ WYSŁANO: " + message;
+
+    } catch (error) {
+
+        status.innerText =
+            "❌ BŁĄD WYSYŁANIA: " + error.message;
+    }
+}
+
+function sendAlarm() {
+
+    sendMessage(
+        "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
+        "5"
+    );
+}
+
+function sendImportant() {
+
+    sendMessage(
+        "⚠️ WAŻNY KOMUNIKAT BHP",
+        "4"
+    );
+}
+
+function sendInfo() {
+
+    sendMessage(
+        "ℹ️ INFORMACJA BHP",
+        "3"
+    );
+}
+
+</script>
 
 </body>
 </html>
