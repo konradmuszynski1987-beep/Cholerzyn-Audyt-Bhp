@@ -27,7 +27,7 @@ body {
 
 h1 {
     font-size: 27px;
-    margin: 10px 0 6px;
+    margin: 10px 0 5px;
 }
 
 .subtitle {
@@ -51,12 +51,12 @@ h1 {
 
 button {
     width: 100%;
-    padding: 28px 15px;
-    margin: 10px 0;
+    padding: 30px 15px;
+    margin: 12px 0;
     border: 0;
     border-radius: 17px;
     color: white;
-    font-size: 23px;
+    font-size: 24px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -71,10 +71,6 @@ button:active {
 
 .audit {
     background: #e67e22;
-}
-
-.test {
-    background: #2878d0;
 }
 
 .last {
@@ -95,11 +91,13 @@ button:active {
 .last-message {
     font-size: 17px;
     font-weight: bold;
+    line-height: 1.4;
 }
 
 .success {
     color: #35d04f;
     margin-top: 8px;
+    font-weight: bold;
 }
 
 .footer {
@@ -132,10 +130,6 @@ button:active {
 
     <button class="audit" onclick="audit()">
         ⚠️ PILNE — AUDYT
-    </button>
-
-    <button class="test" onclick="test()">
-        🔊 TEST POWIADOMIENIA
     </button>
 
     <div class="last">
@@ -211,15 +205,6 @@ function audit() {
         "⚠️ PILNE — AUDYT BHP",
         4,
         "warning"
-    );
-}
-
-function test() {
-
-    send(
-        "🔊 TEST POWIADOMIENIA — CHOLERZYN",
-        3,
-        "loudspeaker"
     );
 }
 
