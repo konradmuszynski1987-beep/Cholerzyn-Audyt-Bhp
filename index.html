@@ -13,188 +13,134 @@
 
 body {
     margin: 0;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
-    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 85% 10%, rgba(255, 193, 7, 0.13), transparent 28%),
+        linear-gradient(135deg, #f7f8fa 0%, #eef1f4 100%);
+    color: #1f2933;
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 550px;
+    width: 100%;
+    max-width: 1100px;
     margin: auto;
+    padding: 25px;
 }
 
-h1 {
-    font-size: 27px;
-    margin: 10px 0 5px;
+/* HEADER */
+
+.header {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    border: 1px solid #e4e7eb;
 }
 
-.subtitle {
-    color: #aaa;
-    margin-bottom: 25px;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo {
+    width: 58px;
+    height: 58px;
+    background: #ffcc00;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.header p {
+    margin: 5px 0 0;
+    color: #6b7280;
+    font-size: 14px;
 }
 
 .status {
-    background: #202020;
-    border-radius: 16px;
-    padding: 18px;
-    margin-bottom: 25px;
-    border: 1px solid #333;
-}
-
-.online {
-    color: #35d04f;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-button {
-    width: 100%;
-    padding: 30px 15px;
-    margin: 12px 0;
-    border: 0;
-    border-radius: 17px;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:active {
-    transform: scale(0.97);
-}
-
-.alarm {
-    background: #d71920;
-}
-
-.audit {
-    background: #e67e22;
-}
-
-.last {
-    margin-top: 25px;
-    background: #202020;
-    border-radius: 16px;
-    padding: 18px;
-    text-align: left;
-    border: 1px solid #333;
-}
-
-.last-title {
-    color: #aaa;
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.last-message {
-    font-size: 17px;
-    font-weight: bold;
-    line-height: 1.4;
-}
-
-.success {
-    color: #35d04f;
-    margin-top: 8px;
-    font-weight: bold;
-}
-
-.footer {
-    margin-top: 25px;
-    color: #666;
+    background: #ecfdf3;
+    color: #16803c;
+    padding: 10px 15px;
+    border-radius: 30px;
     font-size: 13px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-    <h1>🚨 CHOLERZYN — PANEL BHP</h1>
-
-    <div class="subtitle">
-        Panel administratora
-    </div>
-
-    <div class="status">
-        <div class="online">
-            🟢 SYSTEM AKTYWNY
-        </div>
-    </div>
-
-    <button class="alarm" onclick="alarm()">
-        🚨 ALARM BHP
-    </button>
-
-    <button class="audit" onclick="audit()">
-        ⚠️ PILNE — AUDYT
-    </button>
-
-    <div class="last">
-
-        <div class="last-title">
-            OSTATNI KOMUNIKAT
-        </div>
-
-        <div id="lastMessage" class="last-message">
-            Brak wysłanych komunikatów
-        </div>
-
-        <div id="success" class="success">
-        </div>
-
-    </div>
-
-    <div class="footer">
-        CHOLERZYN • SYSTEM BHP
-    </div>
-
-</div>
-
-<script>
-
-const TOPIC = "Cholerzyn-Kr2";
-
-function send(message, priority, tags) {
-
-    const url =
-        "https://ntfy.sh/" + TOPIC +
-        "/publish" +
-        "?message=" + encodeURIComponent(message) +
-        "&priority=" + priority +
-        "&tags=" + encodeURIComponent(tags);
-
-    document.getElementById("lastMessage").innerText = message;
-
-    document.getElementById("success").innerText =
-        "🟢 KOMUNIKAT WYSŁANY";
-
-    window.location.href = url;
+    font-weight: bold;
+    border: 1px solid #b7ebc9;
 }
 
-function alarm() {
+/* HERO */
 
-    send(
-        "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
-        5,
-        "rotating_light"
-    );
-
+.hero {
+    margin-top: 22px;
+    background: #20262d;
+    border-radius: 25px;
+    min-height: 250px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.16);
+    color: white;
+    padding: 38px;
 }
 
-function audit() {
-
-    send(
-        "⚠️ PILNE — AUDYT BHP",
-        4,
-        "warning"
-    );
-
+.hero:after {
+    content: "";
+    position: absolute;
+    right: -100px;
+    top: -120px;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: rgba(255,204,0,0.13);
 }
 
-</script>
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
 
-</body>
-</html>
+.hero h2 {
+    font-size: 34px;
+    margin: 0 0 12px;
+    letter-spacing: -1px;
+}
+
+.hero p {
+    color: #cbd2d9;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.mascot {
+    position: absolute;
+    right: 30px;
+    bottom: -10px;
+    width: 220px;
+    height: 220px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dog {
+    width: 155px;
+    height: 155px;
+    background: #ffcc00;
+    border-radius: 48% 48% 45% 45%;
+    position: relative;
+    box-shadow: 0
