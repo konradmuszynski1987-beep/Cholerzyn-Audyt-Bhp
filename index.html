@@ -10,46 +10,39 @@
 body {
     font-family: Arial, sans-serif;
     background: #111;
-    color: white; 
+    color: white;
     text-align: center;
     padding: 25px;
 }
 
 h1 {
     font-size: 26px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 button {
     width: 100%;
     max-width: 500px;
-    padding: 25px;
-    margin: 12px auto;
+    padding: 30px;
+    margin: 15px auto;
     border: none;
     border-radius: 15px;
     color: white;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
-    display: block;
+    cursor: pointer;
 }
 
 .alarm {
     background: #d71920;
 }
 
-.important {
+.audit {
     background: #e67e22;
 }
 
-.info {
-    background: #2878d0;
-}
-
-#status {
-    margin-top: 25px;
-    padding: 15px;
-    background: #222;
-    border-radius: 10px;
+button:active {
+    transform: scale(0.97);
 }
 </style>
 </head>
@@ -58,79 +51,48 @@ button {
 
 <h1>🚨 CHOLERZYN — AUDYT BHP</h1>
 
-<button class="alarm" onclick="sendAlarm()">
+<button class="alarm" onclick="alarm()">
 🚨 ALARM BHP
 </button>
 
-<button class="important" onclick="sendImportant()">
-⚠️ WAŻNE AUDYT
+<button class="audit" onclick="audit()">
+⚠️ PILNE — AUDYT
 </button>
-
-<button class="info" onclick="sendInfo()">
-ℹ️ INFORMACJA
-</button>
-
-<div id="status">
-Gotowy do wysłania.
-</div>
-
-<iframe name="ntfyFrame" style="display:none;"></iframe>
-
-<form id="ntfyForm"
-      action="https://ntfy.sh/Cholerzyn-Kr2"
-      method="POST"
-      target="ntfyFrame"
-      style="display:none;">
-
-    <input type="hidden" name="title" value="CHOLERZYN — AUDYT BHP">
-    <input type="hidden" name="priority" value="5">
-    <input type="hidden" name="tags" value="rotating_light">
-    <input type="hidden" name="message" id="message">
-
-</form>
 
 <script>
 
-function send(message, priority, tag) {
+const TOPIC = "Cholerzyn-Kr2";
 
-    document.getElementById("message").value = message;
+function send(message, priority, tags) {
 
-    document.getElementById("ntfyForm").priority.value = priority;
-    document.getElementById("ntfyForm").tags.value = tag;
+    const url =
+        "https://ntfy.sh/" + TOPIC +
+        "/publish" +
+        "?message=" + encodeURIComponent(message) +
+        "&priority=" + priority +
+        "&tags=" + encodeURIComponent(tags);
 
-    document.getElementById("status").innerText =
-        "⏳ Wysyłanie...";
-
-    document.getElementById("ntfyForm").submit();
-
-    setTimeout(function() {
-        document.getElementById("status").innerText =
-            "✅ Komunikat wysłany";
-    }, 1000);
+    window.location.href = url;
 }
 
-function sendAlarm() {
+function alarm() {
+
     send(
         "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
-        "5",
+        5,
         "rotating_light"
     );
+
 }
 
-function sendImportant() {
+function audit() {
+
     send(
-        "⚠️ WAŻNY KOMUNIKAT BHP",
-        "4",
+        "⚠️ PILNE — AUDYT BHP",
+        4,
         "warning"
     );
-}
 
-function sendInfo() {
-    send(
-        "ℹ️ INFORMACJA BHP",
-        "3",
-        "information_source"
-    );
 }
 
 </script>
