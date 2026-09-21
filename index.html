@@ -176,36 +176,22 @@ function send(message, priority, tags) {
 
 function alarm() {
 
-    const confirmAlarm = confirm(
-        "🚨 ALARM BHP\n\nCzy na pewno wysłać ALARM do Zebr?"
-    );
-
-    if (!confirmAlarm) {
-        return;
-    }
-
     send(
         "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
         5,
         "rotating_light"
     );
+
 }
 
 function audit() {
-
-    const confirmAudit = confirm(
-        "⚠️ PILNE — AUDYT\n\nCzy wysłać pilny komunikat?"
-    );
-
-    if (!confirmAudit) {
-        return;
-    }
 
     send(
         "⚠️ PILNE — AUDYT BHP",
         4,
         "warning"
     );
+
 }
 
 </script>
