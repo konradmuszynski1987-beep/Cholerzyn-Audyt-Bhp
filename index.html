@@ -4,33 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cholerzyn — Audyt BHP</title>
+<title>Cholerzyn — Panel BHP</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
+    margin: 0;
+    padding: 20px;
     font-family: Arial, sans-serif;
     background: #111;
     color: white;
     text-align: center;
-    padding: 25px;
+}
+
+.container {
+    max-width: 550px;
+    margin: auto;
 }
 
 h1 {
-    font-size: 26px;
-    margin-bottom: 40px;
+    font-size: 27px;
+    margin: 10px 0 6px;
+}
+
+.subtitle {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.status {
+    background: #202020;
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 25px;
+    border: 1px solid #333;
+}
+
+.online {
+    color: #35d04f;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 button {
     width: 100%;
-    max-width: 500px;
-    padding: 30px;
-    margin: 15px auto;
-    border: none;
-    border-radius: 15px;
+    padding: 28px 15px;
+    margin: 10px 0;
+    border: 0;
+    border-radius: 17px;
     color: white;
-    font-size: 24px;
+    font-size: 23px;
     font-weight: bold;
     cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.97);
 }
 
 .alarm {
@@ -41,23 +73,91 @@ button {
     background: #e67e22;
 }
 
-button:active {
-    transform: scale(0.97);
+.test {
+    background: #2878d0;
+}
+
+.last {
+    margin-top: 25px;
+    background: #202020;
+    border-radius: 16px;
+    padding: 18px;
+    text-align: left;
+    border: 1px solid #333;
+}
+
+.last-title {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.last-message {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.success {
+    color: #35d04f;
+    margin-top: 8px;
+}
+
+.footer {
+    margin-top: 25px;
+    color: #666;
+    font-size: 13px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🚨 CHOLERZYN — AUDYT BHP</h1>
+<div class="container">
 
-<button class="alarm" onclick="alarm()">
-🚨 ALARM BHP
-</button>
+    <h1>🚨 CHOLERZYN — PANEL BHP</h1>
 
-<button class="audit" onclick="audit()">
-⚠️ PILNE — AUDYT
-</button>
+    <div class="subtitle">
+        Panel administratora
+    </div>
+
+    <div class="status">
+        <div class="online">
+            🟢 SYSTEM AKTYWNY
+        </div>
+    </div>
+
+    <button class="alarm" onclick="alarm()">
+        🚨 ALARM BHP
+    </button>
+
+    <button class="audit" onclick="audit()">
+        ⚠️ PILNE — AUDYT
+    </button>
+
+    <button class="test" onclick="test()">
+        🔊 TEST POWIADOMIENIA
+    </button>
+
+    <div class="last">
+
+        <div class="last-title">
+            OSTATNI KOMUNIKAT
+        </div>
+
+        <div id="lastMessage" class="last-message">
+            Brak wysłanych komunikatów
+        </div>
+
+        <div id="success" class="success">
+        </div>
+
+    </div>
+
+    <div class="footer">
+        CHOLERZYN • SYSTEM BHP
+    </div>
+
+</div>
 
 <script>
 
@@ -72,27 +172,55 @@ function send(message, priority, tags) {
         "&priority=" + priority +
         "&tags=" + encodeURIComponent(tags);
 
+    document.getElementById("lastMessage").innerText = message;
+
+    document.getElementById("success").innerText =
+        "🟢 KOMUNIKAT WYSŁANY";
+
     window.location.href = url;
 }
 
 function alarm() {
+
+    const confirmAlarm = confirm(
+        "🚨 ALARM BHP\n\nCzy na pewno wysłać ALARM do Zebr?"
+    );
+
+    if (!confirmAlarm) {
+        return;
+    }
 
     send(
         "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
         5,
         "rotating_light"
     );
-
 }
 
 function audit() {
+
+    const confirmAudit = confirm(
+        "⚠️ PILNE — AUDYT\n\nCzy wysłać pilny komunikat?"
+    );
+
+    if (!confirmAudit) {
+        return;
+    }
 
     send(
         "⚠️ PILNE — AUDYT BHP",
         4,
         "warning"
     );
+}
 
+function test() {
+
+    send(
+        "🔊 TEST POWIADOMIENIA — CHOLERZYN",
+        3,
+        "loudspeaker"
+    );
 }
 
 </script>
