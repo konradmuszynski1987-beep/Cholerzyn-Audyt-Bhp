@@ -1,16 +1,388 @@
-.hero-mascot{
-  width:210px;
-  height:190px;
-  right:-5px;
-  bottom:-8px;
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Cholerzyn — Panel BHP</title>
+
+<meta name="theme-color" content="#11161a">
+
+<style>
+
+:root{
+  --yellow:#ffd400;
+  --yellow2:#ffb800;
+  --dark:#101418;
+  --dark2:#171d22;
+  --red:#e11d2e;
+  --red2:#a90d1c;
+  --orange:#f59e0b;
+  --green:#20c878;
+  --white:#fff;
+  --muted:#8f99a3;
+  --border:#e5e7eb;
 }
 
-.mascot-label{
-  display:none;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  min-height:100vh;
+  color:#111827;
+
+  background:
+    radial-gradient(
+      circle at 8% 0%,
+      rgba(255,212,0,.18),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 100% 30%,
+      rgba(17,24,39,.07),
+      transparent 30%
+    ),
+    #eef1f4;
+}
+
+
+/* ================= HEADER ================= */
+
+.header{
+  height:76px;
+  background:rgba(16,20,24,.98);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 28px;
+
+  position:relative;
+  overflow:hidden;
+
+  box-shadow:0 8px 30px rgba(0,0,0,.18);
+}
+
+.header:after{
+  content:"";
+
+  position:absolute;
+  left:0;
+  bottom:0;
+
+  width:100%;
+  height:4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--yellow),
+      #fff06b,
+      var(--yellow)
+    );
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+
+  z-index:2;
+}
+
+.brand-mark{
+  width:43px;
+  height:43px;
+
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--yellow),
+      var(--yellow2)
+    );
+
+  color:#111;
+
+  display:grid;
+  place-items:center;
+
+  font-size:21px;
+  font-weight:900;
+
+  box-shadow:
+    0 5px 18px rgba(255,212,0,.3);
+}
+
+.brand-title{
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+.brand-sub{
+  font-size:10px;
+  color:#9ca3af;
+
+  margin-top:3px;
+
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+}
+
+.system-status{
+  display:flex;
+  align-items:center;
+  gap:9px;
+
+  font-size:11px;
+  font-weight:900;
+
+  letter-spacing:1px;
+
+  color:#d1d5db;
+
+  z-index:2;
+}
+
+.status-dot{
+  width:10px;
+  height:10px;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  box-shadow:
+    0 0 0 5px rgba(32,200,120,.12),
+    0 0 15px rgba(32,200,120,.8);
+}
+
+
+/* ================= MAIN ================= */
+
+.container{
+  max-width:1180px;
+
+  margin:auto;
+
+  padding:28px 20px 45px;
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+  min-height:330px;
+
+  border-radius:28px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at 78% 46%,
+      rgba(255,212,0,.22),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 98% 5%,
+      rgba(255,212,0,.10),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #11161a,
+      #252d33
+    );
+
+  box-shadow:
+    0 20px 50px rgba(15,23,42,.22);
+
+  display:flex;
+  align-items:center;
+
+  padding:42px;
+
+  margin-bottom:24px;
+}
+
+.hero:before{
+  content:"";
+
+  position:absolute;
+
+  width:440px;
+  height:440px;
+
+  border:
+    1px solid
+    rgba(255,212,0,.11);
+
+  border-radius:50%;
+
+  right:-140px;
+  top:-100px;
+}
+
+.hero-content{
+  position:relative;
+
+  z-index:6;
+
+  max-width:650px;
+}
+
+.eyebrow{
+  display:inline-flex;
+
+  align-items:center;
+  gap:8px;
+
+  background:
+    rgba(255,212,0,.12);
+
+  border:
+    1px solid
+    rgba(255,212,0,.28);
+
+  color:var(--yellow);
+
+  padding:8px 13px;
+
+  border-radius:30px;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:1.3px;
+
+  text-transform:uppercase;
+
+  margin-bottom:18px;
+}
+
+.eyebrow i{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  box-shadow:
+    0 0 10px var(--green);
+}
+
+.hero h1{
+  font-size:
+    clamp(34px,5vw,56px);
+
+  line-height:1;
+
+  letter-spacing:-2px;
+
+  margin-bottom:16px;
+}
+
+.hero h1 span{
+  color:var(--yellow);
+}
+
+.hero p{
+  color:#b9c0c7;
+
+  font-size:15px;
+
+  line-height:1.7;
+
+  max-width:600px;
+}
+
+
+/* ================= VON HALSKY ================= */
+
+.hero-mascot{
+  position:absolute;
+
+  right:15px;
+  bottom:-25px;
+
+  width:410px;
+  height:350px;
+
+  z-index:4;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:flex-end;
+
+  pointer-events:none;
+}
+
+.hero-mascot img{
+  position:relative;
+
+  z-index:3;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  object-position:center bottom;
+
+  filter:
+    drop-shadow(
+      0 25px 25px
+      rgba(0,0,0,.48)
+    )
+    drop-shadow(
+      0 0 32px
+      rgba(255,212,0,.22)
+    );
+
+  animation:
+    mascotFloat 4s ease-in-out infinite;
 }
 
 .mascot-glow{
-  width:150px;
-  height:150px;
-  right:25px;
+  position:absolute;
+
+  width:290px;
+  height:290px;
+
+  right:50px;
+  bottom:15px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,212,0,.17);
+
+  filter:blur(38px);
 }
+
+.mascot-label{
+  position:absolute;
+
+  right:18px;
+  bottom:16px;
+
+  z-index:5;
+
+  background:
+    rgba(10,
