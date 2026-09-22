@@ -3,321 +3,345 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Panel Bezpieczeństwa</title>
+
+<title>Panel Bezpieczeństwa – Cholerzyn</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
 font-family:Arial,Helvetica,sans-serif;
-background:radial-gradient(circle at top,#252525 0%,#111 45%,#080808 100%);
+background:#101214;
 color:white;
-min-height:100vh
-}
-
-.header{
-padding:18px 20px;
-background:#111;
-border-bottom:2px solid #f5c400;
-display:flex;
-justify-content:space-between;
-align-items:center
-}
-
-.header-title{
-font-size:22px;
-font-weight:900;
-letter-spacing:1px
-}
-
-.status{
-color:#76ff03;
-font-size:13px;
-font-weight:bold
+min-height:100vh;
 }
 
 .container{
-max-width:1000px;
+max-width:900px;
 margin:auto;
-padding:20px
+padding:20px;
+}
+
+.header{
+background:#1b1e22;
+border:1px solid #30343a;
+border-radius:18px;
+padding:22px;
+margin-bottom:20px;
+}
+
+.header h1{
+margin:0 0 8px;
+font-size:28px;
+}
+
+.header p{
+margin:0;
+color:#aaa;
+font-size:14px;
+}
+
+.status{
+margin-top:15px;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:13px;
+color:#72e06a;
+}
+
+.status-dot{
+width:10px;
+height:10px;
+background:#38d353;
+border-radius:50%;
+box-shadow:0 0 10px #38d353;
 }
 
 .hero{
-background:linear-gradient(145deg,#222,#111);
-border:1px solid #444;
+background:linear-gradient(135deg,#24282d,#151719);
 border-radius:22px;
 padding:25px;
 margin-bottom:20px;
-min-height:300px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:20px;
-overflow:hidden
+border:1px solid #343940;
+position:relative;
+overflow:hidden;
 }
 
-.hero-text{flex:1}
-
-.hero h1{
+.hero h2{
+font-size:27px;
 margin:0 0 10px;
-font-size:clamp(30px,6vw,54px);
-font-weight:900;
-line-height:1
 }
 
 .hero p{
-color:#ccc;
-font-size:17px;
-line-height:1.5
+color:#bfc3c8;
+margin:0;
+max-width:650px;
 }
 
-.hero-mascot{
-width:280px;
-min-width:220px;
-text-align:center;
-position:relative
-}
-
-.mascot-glow{
+.mascot{
 position:absolute;
-width:210px;
-height:210px;
-border-radius:50%;
-background:rgba(245,196,0,.18);
-filter:blur(25px);
-top:10px;
-left:35px
+right:20px;
+bottom:-10px;
+width:140px;
+height:140px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-.hero-mascot img{
-position:relative;
-display:block;
-margin:auto;
-width:250px;
-height:250px;
-object-fit:contain;
-z-index:2
+.mascot img{
+max-width:100%;
+max-height:100%;
 }
 
 .mascot-fallback{
-display:none;
-font-size:32px;
-font-weight:900;
-color:#f5c400;
-padding:80px 0
-}
-
-.mascot-label{
-position:relative;
-z-index:3;
-font-size:11px;
+font-size:16px;
 font-weight:bold;
-letter-spacing:1px;
-color:#f5c400
-}
-
-.mascot-label span{
-display:inline-block;
-width:7px;
-height:7px;
-background:#76ff03;
-border-radius:50%;
-margin-right:5px
 }
 
 .buttons{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:15px
+gap:15px;
+margin-bottom:20px;
 }
 
 .alarm-button{
-min-height:170px;
 border:0;
-border-radius:20px;
+border-radius:18px;
+padding:25px 15px;
 color:white;
 cursor:pointer;
-padding:20px;
-text-align:left;
-box-shadow:0 8px 25px rgba(0,0,0,.35);
-transition:.15s
+min-height:160px;
+transition:.15s;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:8px;
 }
 
-.alarm-button:hover{transform:translateY(-3px)}
-.alarm-button:active{transform:scale(.97)}
+.alarm-button:hover{
+transform:translateY(-2px);
+filter:brightness(1.1);
+}
+
+.alarm-button:active{
+transform:scale(.98);
+}
 
 .alarm-button .icon{
-font-size:46px;
-display:block;
-margin-bottom:15px
+font-size:48px;
 }
 
 .alarm-button strong{
-display:block;
-font-size:24px;
-font-weight:900
+font-size:20px;
 }
 
 .alarm-button small{
-display:block;
-margin-top:8px;
-font-size:13px;
-opacity:.9
+font-size:11px;
+opacity:.8;
+text-align:center;
 }
 
-.bhp{background:linear-gradient(145deg,#c90000,#700000)}
-.fire{background:linear-gradient(145deg,#ff7b00,#a52d00)}
-.audit{background:linear-gradient(145deg,#d6aa00,#725800)}
+.bhp{
+background:#9e1515;
+}
 
-.card{
-margin-top:20px;
-background:#171717;
-border:1px solid #333;
+.fire{
+background:#b87908;
+}
+
+.audit{
+background:#9a7110;
+}
+
+.info{
+background:#1b1e22;
+border:1px solid #30343a;
 border-radius:18px;
-padding:20px
+padding:20px;
+margin-bottom:20px;
 }
 
-.card h2{
+.info h3{
 margin-top:0;
-font-size:20px
+}
+
+.info p{
+color:#bfc3c8;
+line-height:1.5;
 }
 
 .sequence{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px
+display:flex;
+justify-content:space-between;
+gap:10px;
+margin-top:15px;
 }
 
 .step{
-background:#222;
+flex:1;
+background:#111315;
 border-radius:12px;
-padding:15px;
-border-left:4px solid #f5c400
+padding:12px;
+text-align:center;
+border:1px solid #2c3035;
 }
 
 .step strong{
 display:block;
-color:#f5c400;
-margin-bottom:5px
+font-size:16px;
+}
+
+.step span{
+font-size:12px;
+color:#aaa;
 }
 
 .progress{
 height:10px;
-background:#333;
-border-radius:20px;
+background:#292d31;
+border-radius:10px;
 overflow:hidden;
-margin-top:15px
+margin-top:15px;
 }
 
 .progress-bar{
-width:0%;
 height:100%;
+width:0%;
 background:#f5c400;
-transition:width .3s
+transition:.3s;
 }
 
-.footer{
-text-align:center;
-color:#777;
-font-size:12px;
-padding:25px
+.status-text{
+margin-top:10px;
+font-size:13px;
+color:#bbb;
 }
 
 .alarm-screen{
 position:fixed;
 inset:0;
-background:rgba(100,0,0,.97);
+background:rgba(130,0,0,.97);
 z-index:9999;
 display:none;
 align-items:center;
 justify-content:center;
-text-align:center;
-padding:25px
+padding:20px;
 }
 
 .alarm-screen.active{
 display:flex;
-animation:alarmFlash .7s infinite alternate
 }
 
-.alarm-content{max-width:700px}
-
-.alarm-content .big-icon{font-size:100px}
-
-.alarm-content h2{
-font-size:clamp(40px,9vw,90px);
-margin:10px 0;
-font-weight:900
+.alarm-box{
+width:100%;
+max-width:600px;
+background:#17191c;
+border:3px solid #ff3030;
+border-radius:25px;
+padding:35px;
+text-align:center;
+box-shadow:0 0 50px rgba(255,0,0,.5);
+animation:pulse 1s infinite;
 }
 
-.alarm-content p{font-size:20px}
+.alarm-icon{
+font-size:70px;
+}
 
-.close-alarm{
+.alarm-box h2{
+font-size:34px;
+margin:15px 0 10px;
+}
+
+.alarm-box p{
+color:#ccc;
+font-size:18px;
+}
+
+.close-button{
 margin-top:25px;
-padding:16px 30px;
+background:#fff;
+color:#111;
 border:0;
 border-radius:12px;
-background:white;
-color:#111;
-font-weight:900;
-font-size:17px;
-cursor:pointer
+padding:15px 30px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
 }
 
-@keyframes alarmFlash{
-from{background:rgba(100,0,0,.97)}
-to{background:rgba(180,0,0,.97)}
+@keyframes pulse{
+0%,100%{
+transform:scale(1);
+}
+50%{
+transform:scale(1.015);
+}
 }
 
-@media(max-width:750px){
+@media(max-width:700px){
 
-.header{
-flex-direction:column;
-align-items:flex-start;
-gap:5px
+.container{
+padding:12px;
+}
+
+.buttons{
+grid-template-columns:1fr;
 }
 
 .hero{
+padding-right:160px;
+}
+
+.sequence{
 flex-direction:column;
-text-align:center
 }
 
-.hero-mascot{order:-1}
-
-.buttons{grid-template-columns:1fr}
-
-.sequence{grid-template-columns:1fr}
-
-.alarm-button{min-height:145px}
+.hero h2{
+font-size:23px;
 }
+
+}
+
 </style>
 </head>
 
 <body>
 
-<header class="header">
-<div class="header-title">PANEL BEZPIECZEŃSTWA</div>
-<div class="status">● SYSTEM KOMUNIKATÓW • ONLINE</div>
-</header>
+<div class="container">
 
-<main class="container">
+<div class="header">
 
-<section class="hero">
+<h1>PANEL BEZPIECZEŃSTWA</h1>
 
-<div class="hero-text">
-<h1>Szybkie komunikaty bezpieczeństwa</h1>
+<p>CHOLERZYN • SYSTEM KOMUNIKATÓW BEZPIECZEŃSTWA</p>
 
-<p>
-Jeden przycisk wysyła komunikat do urządzeń podłączonych
-do systemu. W przypadku alarmu sprawdź natychmiast
-otrzymane powiadomienie.
-</p>
+<div class="status">
+<div class="status-dot"></div>
+SYSTEM KOMUNIKATÓW • ONLINE
 </div>
 
-<div class="hero-mascot">
+</div>
 
-<div class="mascot-glow"></div>
+
+<div class="hero">
+
+<h2>Szybkie komunikaty bezpieczeństwa</h2>
+
+<p>
+Wybierz odpowiedni komunikat. Informacja zostanie wysłana
+na skonfigurowane urządzenia Zebra.
+</p>
+
+<div class="mascot">
 
 <img
 src="https://inpost.pl/themes/custom/inpost/images/landing/inpost-plus/doggo_2x.png"
@@ -325,269 +349,74 @@ alt="Von Halsky"
 onerror="this.style.display='none';document.getElementById('fallback').style.display='block';"
 >
 
-<div id="fallback" class="mascot-fallback">
+<div id="fallback" class="mascot-fallback" style="display:none;">
 🐶 VON HALSKY
 </div>
 
-<div class="mascot-label">
-<span></span>
-SYSTEM BEZPIECZEŃSTWA
 </div>
 
 </div>
 
-</section>
 
-<section class="buttons">
+<div class="buttons">
 
 <button class="alarm-button bhp" onclick="bhpAlarm()">
+
 <span class="icon">🚨</span>
+
 <strong>ALARM BHP</strong>
+
 <small>NATYCHMIASTOWY ALARM</small>
+
 </button>
+
 
 <button class="alarm-button fire" onclick="fireAlarm()">
+
 <span class="icon">🔥</span>
+
 <strong>UWAGA! POŻAR</strong>
-<small>NATYCHMIAST SPRAWDŹ KOMUNIKAT</small>
+
+<small>SPRAWDŹ KOMUNIKAT</small>
+
 </button>
+
 
 <button class="alarm-button audit" onclick="auditAlarm()">
+
 <span class="icon">⚠️</span>
+
 <strong>AUDYT</strong>
+
 <small>PILNY KOMUNIKAT</small>
+
 </button>
 
-</section>
+</div>
 
-<section class="card">
 
-<h2>Status komunikatu</h2>
+<div class="info">
 
-<div id="statusText">
-System gotowy do wysłania komunikatu.
+<h3>Status wysyłania</h3>
+
+<div id="statusText" class="status-text">
+Gotowy do wysłania komunikatu.
 </div>
 
 <div class="progress">
-<div class="progress-bar" id="progressBar"></div>
+
+<div id="progressBar" class="progress-bar"></div>
+
 </div>
 
-</section>
+</div>
 
-<section class="card">
 
-<h2>Sekwencja alarmowa</h2>
+<div class="info">
+
+<h3>Sekwencja alarmowa BHP</h3>
 
 <div class="sequence">
 
 <div class="step">
-<strong>0 sekund</strong>
-Pierwszy alarm
-</div>
-
-<div class="step">
-<strong>+2 sekundy</strong>
-Drugi sygnał
-</div>
-
-<div class="step">
-<strong>+10 sekund</strong>
-Kontrola odbioru
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-<footer class="footer">
-PANEL BEZPIECZEŃSTWA • CHOLERZYN
-</footer>
-
-<div class="alarm-screen" id="alarmScreen">
-
-<div class="alarm-content">
-
-<div class="big-icon" id="alarmIcon">🚨</div>
-
-<h2 id="alarmTitle">ALARM</h2>
-
-<p id="alarmMessage">
-Sprawdź komunikat bezpieczeństwa.
-</p>
-
-<button class="close-alarm" onclick="closeAlarm()">
-ZAMKNIJ
-</button>
-
-</div>
-
-</div>
-
-<script>
-
-const TOPIC="Cholerzyn-Kr2";
-
-let alarmTimers=[];
-let activeRequests=[];
-
-function updateStatus(text,progress){
-document.getElementById("statusText").innerText=text;
-document.getElementById("progressBar").style.width=progress+"%";
-}
-
-function publish(message,priority,tags){
-
-const url=
-"https://ntfy.sh/"+
-TOPIC+
-"/publish?message="+encodeURIComponent(message)+
-"&priority="+priority+
-"&tags="+encodeURIComponent(tags)+
-"&cache=no&cb="+Date.now();
-
-const img=new Image();
-
-img.onload=function(){
-console.log("Komunikat wysłany");
-};
-
-img.onerror=function(){
-console.log("Komunikat wysłany");
-};
-
-img.src=url;
-
-activeRequests.push(img);
-}
-
-function vibrate(){
-
-if("vibrate" in navigator){
-navigator.vibrate([400,150,400]);
-}
-
-}
-
-function showAlarm(icon,title,message){
-
-document.getElementById("alarmIcon").innerText=icon;
-document.getElementById("alarmTitle").innerText=title;
-document.getElementById("alarmMessage").innerText=message;
-
-document.getElementById("alarmScreen").classList.add("active");
-
-vibrate();
-}
-
-function closeAlarm(){
-document.getElementById("alarmScreen").classList.remove("active");
-}
-
-function clearTimers(){
-
-alarmTimers.forEach(function(timer){
-clearTimeout(timer);
-});
-
-alarmTimers=[];
-}
-
-function bhpAlarm(){
-
-clearTimers();
-
-showAlarm(
-"🚨",
-"ALARM BHP",
-"NATYCHMIAST SPRAWDŹ KOMUNIKAT"
-);
-
-updateStatus(
-"Wysłano pierwszy alarm BHP.",
-33
-);
-
-publish(
-"🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
-5,
-"rotating_light,warning"
-);
-
-alarmTimers.push(
-setTimeout(function(){
-
-publish(
-"🚨 ALARM BHP — DRUGI SYGNAŁ — PILNE",
-5,
-"rotating_light,warning"
-);
-
-updateStatus(
-"Wysłano drugi sygnał alarmowy.",
-66
-);
-
-},2000)
-);
-
-alarmTimers.push(
-setTimeout(function(){
-
-publish(
-"🟠 CZY WSZYSCY ODEBRALI ALARM?",
-5,
-"warning"
-);
-
-updateStatus(
-"Sekwencja alarmowa zakończona.",
-100
-);
-
-},10000)
-);
-
-}
-
-
-/* POŻAR */
-
-function fireAlarm(){
-
-clearTimers();
-
-showAlarm(
-"🔥",
-"UWAGA! POŻAR",
-"INFORMACJA — SPRAWDŹ KOMUNIKAT"
-);
-
-updateStatus(
-"Wysłano komunikat dotyczący pożaru.",
-100
-);
-
-publish(
-"🔥 UWAGA! POŻAR — SPRAWDŹ KOMUNIKAT",
-4,
-"warning"
-);
-
-}
-
-
-/* AUDYT */
-
-function auditAlarm(){
-
-clearTimers();
-
-showAlarm(
-"⚠️",
-"AUDYT",
-"NATYCHMIAST SPRAWDŹ KOMUNIKAT I PRZYGOTUJ SIĘ DO AUDYTU"
-);
-
-updateStatus(
+<strong>0 s
