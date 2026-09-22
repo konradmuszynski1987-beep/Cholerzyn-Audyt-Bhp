@@ -470,49 +470,61 @@ ZAMKNIJ
 const TOPIC = "Cholerzyn-Kr2";
 
 let alarmTimers = [];
-let activeRequests = [];
 
 
-function updateStatus(text, progress){
-
-document.getElementById("statusText").innerText = text;
-
-document.getElementById("progressBar").style.width =
-progress + "%";
-
-}
-
+/* =========================
+   WYSYŁANIE DO NTFY
+   ========================= */
 
 function publish(message, priority, tags){
 
-const url =
-"https://ntfy.sh/" +
-TOPIC +
-"/publish?message=" +
-encodeURIComponent(message) +
-"&priority=" +
-priority +
-"&tags=" +
-encodeURIComponent(tags) +
-"&cache=no&cb=" +
-Date.now();
+const url = "https://ntfy.sh/" + TOPIC;
 
-const img = new Image();
+fetch(url,{
+method:"POST",
 
-img.onload = function(){
-console.log("Komunikat wysłany");
-};
+headers:{
+"Priority":String(priority),
+"Tags":tags,
+"Title":"PANEL BEZPIECZEŃSTWA"
+},
 
-img.onerror = function(){
-console.log("Komunikat wysłany");
-};
+body:message
 
-img.src = url;
+})
 
-activeRequests.push(img);
+.then(function(response){
+
+if(response.ok){
+
+console.log("NTFY — wysłano:",message);
+
+}else{
+
+console.log(
+"NTFY — błąd HTTP:",
+response.status
+);
 
 }
 
+})
+
+.catch(function(error){
+
+console.log(
+"NTFY — błąd połączenia:",
+error
+);
+
+});
+
+}
+
+
+/* =========================
+   WIBRACJA
+   ========================= */
 
 function vibrate(){
 
@@ -529,6 +541,10 @@ navigator.vibrate([
 }
 
 
+/* =========================
+   EKRAN ALARMOWY
+   ========================= */
+
 function showAlarm(icon,title,message){
 
 document.getElementById("alarmIcon").innerText = icon;
@@ -544,6 +560,10 @@ vibrate();
 }
 
 
+/* =========================
+   ZAMKNIĘCIE
+   ========================= */
+
 function closeAlarm(){
 
 document
@@ -553,6 +573,10 @@ document
 
 }
 
+
+/* =========================
+   CZYSZCZENIE TIMERÓW
+   ========================= */
 
 function clearTimers(){
 
@@ -585,6 +609,7 @@ updateStatus(
 "Wysłano pierwszy alarm BHP.",
 33
 );
+
 
 publish(
 "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
@@ -644,4 +669,69 @@ function fireAlarm(){
 clearTimers();
 
 showAlarm(
-"🔥
+"🔥",
+"UWAGA! POŻAR",
+"INFORMACJA — SPRAWDŹ KOMUNIKAT"
+);
+
+updateStatus(
+"Wysłano komunikat dotyczący pożaru.",
+100
+);
+
+
+publish(
+"🔥 UWAGA! POŻAR — SPRAWDŹ KOMUNIKAT",
+5,
+"warning"
+);
+
+}
+
+
+/* =========================
+   AUDYT
+   ========================= */
+
+function auditAlarm(){
+
+clearTimers();
+
+showAlarm(
+"⚠️",
+"AUDYT",
+"INFORMACJA — SPRAWDŹ KOMUNIKAT"
+);
+
+updateStatus(
+"Wysłano komunikat dotyczący audytu.",
+100
+);
+
+
+publish(
+"⚠️ AUDYT — SPRAWDŹ KOMUNIKAT",
+5,
+"warning"
+);
+
+}
+
+
+/* =========================
+   STATUS
+   ========================= */
+
+function updateStatus(text,progress){
+
+document.getElementById("statusText").innerText = text;
+
+document.getElementById("progressBar").style.width =
+progress + "%";
+
+}
+
+</script>
+
+</body>
+</html>
