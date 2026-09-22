@@ -637,8 +637,6 @@ updateStatus(
 
 /* =========================
    POŻAR
-   ZOSTAWIAMY DZIAŁANIE
-   KTÓRE WCZEŚNIEJ DZIAŁAŁO
    ========================= */
 
 function fireAlarm(){
@@ -667,9 +665,8 @@ publish(
 
 /* =========================
    AUDYT BHP
-   DOSTAJE DOKŁADNIE
-   TĘ SAMĄ FUNKCJĘ TECHNICZNĄ
-   CO WCZEŚNIEJ POŻAR
+   IDENTYCZNA SEKWENCJA
+   JAK ALARM BHP
    ========================= */
 
 function auditAlarm(){
@@ -679,18 +676,58 @@ clearTimers();
 showAlarm(
 "⚠️",
 "AUDYT BHP",
-"INFORMACJA — SPRAWDŹ KOMUNIKAT"
+"NATYCHMIAST SPRAWDŹ KOMUNIKAT"
 );
 
 updateStatus(
-"Wysłano komunikat dotyczący audytu BHP.",
-100
+"Wysłano pierwszy komunikat audytu BHP.",
+33
 );
 
 publish(
-"⚠️ AUDYT BHP — SPRAWDŹ KOMUNIKAT",
-4,
+"⚠️ AUDYT BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
+5,
+"rotating_light,warning"
+);
+
+
+alarmTimers.push(
+
+setTimeout(function(){
+
+publish(
+"⚠️ AUDYT BHP — DRUGI SYGNAŁ — PILNE",
+5,
+"rotating_light,warning"
+);
+
+updateStatus(
+"Wysłano drugi sygnał audytu BHP.",
+66
+);
+
+},2000)
+
+);
+
+
+alarmTimers.push(
+
+setTimeout(function(){
+
+publish(
+"🟠 CZY WSZYSCY ODEBRALI KOMUNIKAT?",
+5,
 "warning"
+);
+
+updateStatus(
+"Sekwencja audytu BHP zakończona.",
+100
+);
+
+},10000)
+
 );
 
 }
