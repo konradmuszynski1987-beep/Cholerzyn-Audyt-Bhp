@@ -551,6 +551,10 @@ updateStatus(
 
 }
 
+
+/* POŻAR = obecna funkcja AUDYTU
+   Niealarmowy komunikat, priorytet 4 */
+
 function fireAlarm(){
 
 clearTimers();
@@ -558,21 +562,25 @@ clearTimers();
 showAlarm(
 "🔥",
 "UWAGA! POŻAR",
-"NATYCHMIAST SPRAWDŹ KOMUNIKAT I POSTĘPUJ ZGODNIE Z PROCEDURĄ"
+"INFORMACJA — SPRAWDŹ KOMUNIKAT"
 );
 
 updateStatus(
-"Wysłano alarm pożarowy.",
+"Wysłano komunikat dotyczący pożaru.",
 100
 );
 
 publish(
-"🔥 UWAGA! POŻAR — NATYCHMIAST SPRAWDŹ KOMUNIKAT I POSTĘPUJ ZGODNIE Z PROCEDURĄ",
-5,
-"fire,rotating_light"
+"🔥 UWAGA! POŻAR — SPRAWDŹ KOMUNIKAT",
+4,
+"warning"
 );
 
 }
+
+
+/* AUDYT BHP = obecna funkcja POŻARU
+   Alarmowy komunikat, priorytet 5 */
 
 function auditAlarm(){
 
@@ -581,18 +589,18 @@ clearTimers();
 showAlarm(
 "⚠️",
 "AUDYT BHP",
-"UWAGA! PILNY KOMUNIKAT — PROSIMY O PRZYGOTOWANIE"
+"NATYCHMIAST SPRAWDŹ KOMUNIKAT I PRZYGOTUJ SIĘ DO AUDYTU"
 );
 
 updateStatus(
-"Wysłano komunikat dotyczący audytu BHP.",
+"Wysłano alarm dotyczący audytu BHP.",
 100
 );
 
 publish(
-"⚠️ AUDYT BHP — UWAGA! PILNY KOMUNIKAT — PROSIMY O PRZYGOTOWANIE",
+"⚠️ AUDYT BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT I PRZYGOTUJ SIĘ DO AUDYTU",
 5,
-"warning"
+"warning,rotating_light"
 );
 
 }
