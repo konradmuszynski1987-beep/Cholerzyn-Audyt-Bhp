@@ -419,4 +419,162 @@ Gotowy do wysłania komunikatu.
 <div class="sequence">
 
 <div class="step">
-<strong>0 s
+<strong>0 s</strong>
+<span>Pierwszy alarm</span>
+</div>
+
+<div class="step">
+<strong>+2 s</strong>
+<span>Drugi sygnał</span>
+</div>
+
+<div class="step">
+<strong>+10 s</strong>
+<span>Kontrola odbioru</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div id="alarmScreen" class="alarm-screen">
+
+<div class="alarm-box">
+
+<div id="alarmIcon" class="alarm-icon">
+🚨
+</div>
+
+<h2 id="alarmTitle">
+ALARM
+</h2>
+
+<p id="alarmMessage">
+NATYCHMIAST SPRAWDŹ KOMUNIKAT
+</p>
+
+<button class="close-button" onclick="closeAlarm()">
+ZAMKNIJ
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+const TOPIC = "Cholerzyn-Kr2";
+
+let alarmTimers = [];
+let activeRequests = [];
+
+
+function updateStatus(text, progress){
+
+document.getElementById("statusText").innerText = text;
+
+document.getElementById("progressBar").style.width =
+progress + "%";
+
+}
+
+
+function publish(message, priority, tags){
+
+const url =
+"https://ntfy.sh/" +
+TOPIC +
+"/publish?message=" +
+encodeURIComponent(message) +
+"&priority=" +
+priority +
+"&tags=" +
+encodeURIComponent(tags) +
+"&cache=no&cb=" +
+Date.now();
+
+const img = new Image();
+
+img.onload = function(){
+console.log("Komunikat wysłany");
+};
+
+img.onerror = function(){
+console.log("Komunikat wysłany");
+};
+
+img.src = url;
+
+activeRequests.push(img);
+
+}
+
+
+function vibrate(){
+
+if("vibrate" in navigator){
+
+navigator.vibrate([
+400,
+150,
+400
+]);
+
+}
+
+}
+
+
+function showAlarm(icon,title,message){
+
+document.getElementById("alarmIcon").innerText = icon;
+
+document.getElementById("alarmTitle").innerText = title;
+
+document.getElementById("alarmMessage").innerText = message;
+
+document.getElementById("alarmScreen").classList.add("active");
+
+vibrate();
+
+}
+
+
+function closeAlarm(){
+
+document
+.getElementById("alarmScreen")
+.classList
+.remove("active");
+
+}
+
+
+function clearTimers(){
+
+alarmTimers.forEach(function(timer){
+
+clearTimeout(timer);
+
+});
+
+alarmTimers = [];
+
+}
+
+
+/* =========================
+   ALARM BHP
+   ========================= */
+
+function bhpAlarm(){
+
+clearTimers();
+
+showAlarm(
+"🚨",
+"ALARM BHP
