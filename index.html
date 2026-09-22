@@ -386,7 +386,7 @@ onerror="this.style.display='none';document.getElementById('fallback').style.dis
 
 <span class="icon">⚠️</span>
 
-<strong>AUDYT BHP</strong>
+<strong>AUDYT</strong>
 
 <small>PILNY KOMUNIKAT</small>
 
@@ -637,8 +637,6 @@ updateStatus(
 
 /* =========================
    POŻAR
-   ZOSTAWIAMY DZIAŁANIE
-   KTÓRE WCZEŚNIEJ DZIAŁAŁO
    ========================= */
 
 function fireAlarm(){
@@ -646,56 +644,4 @@ function fireAlarm(){
 clearTimers();
 
 showAlarm(
-"🔥",
-"UWAGA! POŻAR",
-"INFORMACJA — SPRAWDŹ KOMUNIKAT"
-);
-
-updateStatus(
-"Wysłano komunikat dotyczący pożaru.",
-100
-);
-
-publish(
-"🔥 UWAGA! POŻAR — SPRAWDŹ KOMUNIKAT",
-4,
-"warning"
-);
-
-}
-
-
-/* =========================
-   AUDYT BHP
-   DOSTAJE DOKŁADNIE
-   TĘ SAMĄ FUNKCJĘ TECHNICZNĄ
-   CO WCZEŚNIEJ POŻAR
-   ========================= */
-
-function auditAlarm(){
-
-clearTimers();
-
-showAlarm(
-"⚠️",
-"AUDYT BHP",
-"INFORMACJA — SPRAWDŹ KOMUNIKAT"
-);
-
-updateStatus(
-"Wysłano komunikat dotyczący audytu BHP.",
-100
-);
-
-publish(
-"⚠️ AUDYT BHP — SPRAWDŹ KOMUNIKAT",
-4,
-"warning"
-);
-
-}
-
-</script>
-
-</body>
-</html>
+"🔥
