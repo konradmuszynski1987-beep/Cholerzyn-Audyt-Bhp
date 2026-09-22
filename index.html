@@ -4,12 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Panel bezpieczeństwa</title>
+
 <style>
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
+
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:#101010;
@@ -17,6 +19,7 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 }
+
 body::before{
   content:"";
   position:fixed;
@@ -27,6 +30,7 @@ body::before{
     radial-gradient(circle at 85% 80%,rgba(255,170,0,.10),transparent 25%),
     linear-gradient(135deg,#0d0d0d 0%,#171717 50%,#0b0b0b 100%);
 }
+
 body::after{
   content:"";
   position:fixed;
@@ -37,7 +41,9 @@ body::after{
     linear-gradient(135deg,#fff 1px,transparent 1px);
   background-size:45px 45px;
 }
-/* ===== HEADER ===== */
+
+/* HEADER */
+
 .header{
   width:100%;
   padding:18px 28px;
@@ -45,6 +51,7 @@ body::after{
   background:rgba(8,8,8,.88);
   backdrop-filter:blur(10px);
 }
+
 .header-inner{
   max-width:1200px;
   margin:auto;
@@ -52,6 +59,7 @@ body::after{
   align-items:center;
   justify-content:space-between;
 }
+
 .logo{
   display:flex;
   align-items:center;
@@ -59,6 +67,7 @@ body::after{
   font-weight:800;
   letter-spacing:1px;
 }
+
 .logo-mark{
   width:42px;
   height:42px;
@@ -71,20 +80,26 @@ body::after{
   font-size:23px;
   box-shadow:0 0 25px rgba(255,204,0,.2);
 }
+
 .logo-text{
   font-size:17px;
 }
+
 .header-status{
   color:#aaa;
   font-size:13px;
 }
-/* ===== MAIN ===== */
+
+/* MAIN */
+
 .container{
   max-width:1200px;
   margin:auto;
   padding:35px 20px 60px;
 }
-/* ===== HERO ===== */
+
+/* HERO */
+
 .hero{
   min-height:360px;
   border-radius:28px;
@@ -100,6 +115,7 @@ body::after{
   align-items:center;
   justify-content:space-between;
 }
+
 .hero::after{
   content:"";
   position:absolute;
@@ -110,11 +126,13 @@ body::after{
   border-radius:50%;
   border:70px solid rgba(255,204,0,.055);
 }
+
 .hero-content{
   max-width:620px;
   position:relative;
   z-index:2;
 }
+
 .eyebrow{
   color:#ffcc00;
   font-size:13px;
@@ -123,22 +141,27 @@ body::after{
   margin-bottom:14px;
   text-transform:uppercase;
 }
+
 .hero h1{
   font-size:clamp(38px,6vw,72px);
   line-height:.95;
   margin-bottom:22px;
   letter-spacing:-3px;
 }
+
 .hero h1 span{
   color:#ffcc00;
 }
+
 .hero p{
   color:#bdbdbd;
   font-size:17px;
   line-height:1.6;
   max-width:560px;
 }
-/* ===== MASCOT ===== */
+
+/* VON HALSKI */
+
 .hero-mascot{
   width:380px;
   height:300px;
@@ -148,6 +171,7 @@ body::after{
   justify-content:center;
   z-index:2;
 }
+
 .mascot-glow{
   position:absolute;
   width:270px;
@@ -156,6 +180,7 @@ body::after{
   background:rgba(255,204,0,.18);
   filter:blur(35px);
 }
+
 .hero-mascot img{
   position:relative;
   max-width:330px;
@@ -163,6 +188,7 @@ body::after{
   object-fit:contain;
   filter:drop-shadow(0 20px 25px rgba(0,0,0,.5));
 }
+
 .mascot-label{
   position:absolute;
   bottom:2px;
@@ -176,6 +202,7 @@ body::after{
   letter-spacing:1px;
   color:#eee;
 }
+
 .mascot-label span{
   display:inline-block;
   width:7px;
@@ -185,24 +212,31 @@ body::after{
   margin-right:7px;
   box-shadow:0 0 8px #35d16f;
 }
-/* ===== SECTION ===== */
+
+/* SECTION */
+
 .section-title{
   margin:38px 0 18px;
 }
+
 .section-title h2{
   font-size:25px;
 }
+
 .section-title p{
   color:#858585;
   margin-top:6px;
   font-size:14px;
 }
-/* ===== KAFELKI ===== */
+
+/* KAFELKI */
+
 .actions-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:18px;
 }
+
 .info-tile{
   position:relative;
   min-height:220px;
@@ -215,13 +249,16 @@ body::after{
   box-shadow:0 15px 35px rgba(0,0,0,.25);
   user-select:none;
 }
+
 .info-tile:hover{
   transform:translateY(-5px);
   box-shadow:0 20px 45px rgba(0,0,0,.4);
 }
+
 .info-tile:active{
   transform:scale(.98);
 }
+
 .info-tile::after{
   content:"";
   position:absolute;
@@ -232,6 +269,7 @@ body::after{
   border-radius:50%;
   border:35px solid rgba(255,255,255,.05);
 }
+
 .tile-icon{
   width:60px;
   height:60px;
@@ -243,6 +281,7 @@ body::after{
   margin-bottom:25px;
   background:rgba(255,255,255,.1);
 }
+
 .tile-small{
   font-size:12px;
   font-weight:800;
@@ -250,15 +289,18 @@ body::after{
   margin-bottom:7px;
   opacity:.8;
 }
+
 .info-tile h3{
   font-size:27px;
   margin-bottom:10px;
 }
+
 .info-tile p{
   color:rgba(255,255,255,.68);
   font-size:14px;
   line-height:1.45;
 }
+
 .tile-arrow{
   position:absolute;
   right:22px;
@@ -266,19 +308,24 @@ body::after{
   font-size:23px;
   opacity:.65;
 }
+
 .tile-alarm{
   background:
     linear-gradient(135deg,rgba(170,20,20,.95),rgba(65,10,10,.98));
 }
+
 .tile-fire{
   background:
     linear-gradient(135deg,rgba(235,90,0,.95),rgba(100,28,0,.98));
 }
+
 .tile-audit{
   background:
     linear-gradient(135deg,rgba(185,145,0,.95),rgba(82,59,0,.98));
 }
-/* ===== STATUS ===== */
+
+/* STATUS */
+
 .status-card{
   margin-top:20px;
   background:#151515;
@@ -286,20 +333,24 @@ body::after{
   border-radius:18px;
   padding:18px 20px;
 }
+
 .status-row{
   display:flex;
   justify-content:space-between;
   gap:15px;
   align-items:center;
 }
+
 .status{
   color:#aaa;
   font-size:14px;
 }
+
 .status.alerting{
   color:#ffcc00;
   font-weight:700;
 }
+
 .progress-bg{
   height:5px;
   background:#292929;
@@ -307,6 +358,7 @@ body::after{
   margin-top:13px;
   overflow:hidden;
 }
+
 .progress{
   height:100%;
   width:0%;
@@ -314,7 +366,9 @@ body::after{
   border-radius:20px;
   transition:.3s;
 }
-/* ===== SEQUENCE ===== */
+
+/* SEQUENCE */
+
 .sequence{
   margin-top:25px;
   background:rgba(255,255,255,.035);
@@ -322,15 +376,18 @@ body::after{
   border-radius:20px;
   padding:20px;
 }
+
 .sequence h3{
   font-size:16px;
   margin-bottom:15px;
 }
+
 .steps{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
 }
+
 .step{
   padding:10px 13px;
   background:#1d1d1d;
@@ -338,10 +395,13 @@ body::after{
   color:#aaa;
   font-size:13px;
 }
+
 .step strong{
   color:#ffcc00;
 }
-/* ===== ALARM OVERLAY ===== */
+
+/* ALARM OVERLAY */
+
 .alarm-mode{
   position:fixed;
   inset:0;
@@ -353,27 +413,33 @@ body::after{
   text-align:center;
   padding:25px;
 }
+
 .alarm-mode.show{
   display:flex;
   animation:alarmFlash .8s infinite alternate;
 }
+
 .alarm-box{
   max-width:650px;
 }
+
 .alarm-icon{
   font-size:90px;
   margin-bottom:20px;
 }
+
 .alarm-box h2{
   font-size:clamp(38px,8vw,75px);
   line-height:1;
   margin-bottom:20px;
 }
+
 .alarm-box p{
   color:#fff;
   font-size:18px;
   line-height:1.5;
 }
+
 .close-alarm{
   margin-top:30px;
   border:1px solid rgba(255,255,255,.4);
@@ -384,257 +450,364 @@ body::after{
   font-size:15px;
   cursor:pointer;
 }
+
 @keyframes alarmFlash{
   from{background:rgba(110,0,0,.94);}
   to{background:rgba(175,0,0,.98);}
 }
-/* ===== FOOTER ===== */
+
+/* FOOTER */
+
 .footer{
   text-align:center;
   color:#555;
   font-size:11px;
   margin-top:30px;
 }
-/* ===== MOBILE ===== */
+
+/* MOBILE */
+
 @media(max-width:850px){
+
   .header{
     padding:15px;
   }
+
   .header-status{
     display:none;
   }
+
   .container{
     padding:20px 14px 40px;
   }
+
   .hero{
     min-height:auto;
     padding:28px 22px;
     flex-direction:column;
     align-items:flex-start;
   }
+
   .hero h1{
     letter-spacing:-2px;
   }
+
   .hero-mascot{
     width:100%;
     height:250px;
     margin-top:15px;
   }
+
   .hero-mascot img{
     max-width:290px;
     max-height:240px;
   }
+
   .actions-grid{
     grid-template-columns:1fr;
   }
+
   .info-tile{
     min-height:190px;
   }
+
   .status-row{
     align-items:flex-start;
   }
 }
 </style>
 </head>
+
 <body>
+
 <header class="header">
   <div class="header-inner">
+
     <div class="logo">
-      <div class="logo-mark">
-        ✓
-      </div>
+      <div class="logo-mark">✓</div>
+
       <div class="logo-text">
         PANEL BEZPIECZEŃSTWA
       </div>
     </div>
+
     <div class="header-status">
       SYSTEM KOMUNIKATÓW • ONLINE
     </div>
+
   </div>
 </header>
+
+
 <main class="container">
-  <section class="hero">
-    <div class="hero-content">
-      <div class="eyebrow">
-        PANEL INFORMACYJNY BHP
-      </div>
-      <h1>
-        Szybkie<br>
-        <span>komunikaty</span><br>
-        bezpieczeństwa
-      </h1>
-      <p>
-        Jedno miejsce do natychmiastowego przekazywania
-        ważnych informacji i komunikatów bezpieczeństwa.
-      </p>
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      PANEL INFORMACYJNY BHP
     </div>
-    <div class="hero-mascot">
-      <div class="mascot-glow"></div>
-      <img
-        src="von-halsky-transparent.png"
-        alt="Maskotka"
-      >
-      <div class="mascot-label">
-        <span></span>
-        SYSTEM BEZPIECZEŃSTWA
-      </div>
-    </div>
-  </section>
-  <div class="section-title">
-    <h2>
-      Komunikaty
-    </h2>
+
+    <h1>
+      Szybkie<br>
+      <span>komunikaty</span><br>
+      bezpieczeństwa
+    </h1>
+
     <p>
-      Wybierz rodzaj komunikatu, który chcesz natychmiast wysłać.
+      Jedno miejsce do natychmiastowego przekazywania
+      ważnych informacji i komunikatów bezpieczeństwa.
     </p>
+
   </div>
-  <section class="actions-grid">
-    <div
-      class="info-tile tile-alarm"
-      onclick="alarm()"
+
+
+  <div class="hero-mascot">
+
+    <div class="mascot-glow"></div>
+
+    <img
+      src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1495592958594149"
+      alt="Von Halski"
     >
-      <div class="tile-arrow">
-        ↗
-      </div>
-      <div class="tile-icon">
-        🚨
-      </div>
-      <div class="tile-small">
-        UWAGA!
-      </div>
-      <h3>
-        ALARM BHP
-      </h3>
-      <p>
-        Natychmiastowy komunikat bezpieczeństwa
-        wysyłany do wszystkich urządzeń.
-      </p>
+
+    <div class="mascot-label">
+      <span></span>
+      SYSTEM BEZPIECZEŃSTWA
     </div>
-    <div
-      class="info-tile tile-fire"
-      onclick="fireAlarm()"
-    >
-      <div class="tile-arrow">
-        ↗
-      </div>
-      <div class="tile-icon">
-        🔥
-      </div>
-      <div class="tile-small">
-        UWAGA!
-      </div>
-      <h3>
-        POŻAR
-      </h3>
-      <p>
-        Natychmiastowy komunikat alarmowy
-        dotyczący zagrożenia pożarowego.
-      </p>
+
+  </div>
+
+</section>
+
+
+<div class="section-title">
+
+  <h2>
+    Komunikaty
+  </h2>
+
+  <p>
+    Wybierz rodzaj komunikatu, który chcesz natychmiast wysłać.
+  </p>
+
+</div>
+
+
+<section class="actions-grid">
+
+  <div
+    class="info-tile tile-alarm"
+    onclick="alarm()"
+  >
+
+    <div class="tile-arrow">
+      ↗
     </div>
-    <div
-      class="info-tile tile-audit"
-      onclick="audit()"
-    >
-      <div class="tile-arrow">
-        ↗
-      </div>
-      <div class="tile-icon">
-        ⚠️
-      </div>
-      <div class="tile-small">
-        UWAGA! PILNE
-      </div>
-      <h3>
-        AUDYT BHP
-      </h3>
-      <p>
-        Pilny komunikat informacyjny dotyczący
-        audytu i bezpieczeństwa.
-      </p>
+
+    <div class="tile-icon">
+      🚨
     </div>
-  </section>
-  <section class="status-card">
-    <div class="status-row">
-      <div
-        id="status"
-        class="status"
-      >
-        System gotowy — oczekuje na komunikat.
-      </div>
+
+    <div class="tile-small">
+      UWAGA!
     </div>
-    <div class="progress-bg">
-      <div
-        id="progress"
-        class="progress"
-      ></div>
-    </div>
-  </section>
-  <section class="sequence">
+
     <h3>
-      🚨 Sekwencja alarmu BHP
+      ALARM BHP
     </h3>
-    <div class="steps">
-      <div class="step">
-        <strong>0 s</strong> — pierwszy alarm
-      </div>
-      <div class="step">
-        <strong>+2 s</strong> — drugi sygnał
-      </div>
-      <div class="step">
-        <strong>+10 s</strong> — kontrola odbioru
-      </div>
-    </div>
-  </section>
-  <div class="footer">
-    Panel komunikatów bezpieczeństwa
+
+    <p>
+      Natychmiastowy komunikat bezpieczeństwa
+      wysyłany do wszystkich urządzeń.
+    </p>
+
   </div>
+
+
+  <div
+    class="info-tile tile-fire"
+    onclick="fireAlarm()"
+  >
+
+    <div class="tile-arrow">
+      ↗
+    </div>
+
+    <div class="tile-icon">
+      🔥
+    </div>
+
+    <div class="tile-small">
+      UWAGA!
+    </div>
+
+    <h3>
+      POŻAR
+    </h3>
+
+    <p>
+      Natychmiastowy komunikat alarmowy
+      dotyczący zagrożenia pożarowego.
+    </p>
+
+  </div>
+
+
+  <div
+    class="info-tile tile-audit"
+    onclick="audit()"
+  >
+
+    <div class="tile-arrow">
+      ↗
+    </div>
+
+    <div class="tile-icon">
+      ⚠️
+    </div>
+
+    <div class="tile-small">
+      UWAGA! PILNE
+    </div>
+
+    <h3>
+      AUDYT BHP
+    </h3>
+
+    <p>
+      Pilny komunikat informacyjny dotyczący
+      audytu i bezpieczeństwa.
+    </p>
+
+  </div>
+
+</section>
+
+
+<section class="status-card">
+
+  <div class="status-row">
+
+    <div
+      id="status"
+      class="status"
+    >
+      System gotowy — oczekuje na komunikat.
+    </div>
+
+  </div>
+
+  <div class="progress-bg">
+
+    <div
+      id="progress"
+      class="progress"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<section class="sequence">
+
+  <h3>
+    🚨 Sekwencja alarmu BHP
+  </h3>
+
+  <div class="steps">
+
+    <div class="step">
+      <strong>0 s</strong> — pierwszy alarm
+    </div>
+
+    <div class="step">
+      <strong>+2 s</strong> — drugi sygnał
+    </div>
+
+    <div class="step">
+      <strong>+10 s</strong> — kontrola odbioru
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="footer">
+  Panel komunikatów bezpieczeństwa
+</div>
+
 </main>
+
+
 <div
   id="alarmMode"
   class="alarm-mode"
 >
+
   <div class="alarm-box">
+
     <div class="alarm-icon">
       🚨
     </div>
+
     <h2 id="alarmTitle">
       ALARM BHP
     </h2>
+
     <p id="alarmText">
       Pierwszy sygnał został wysłany.
     </p>
+
     <button
       class="close-alarm"
       onclick="closeAlarm()"
     >
       ZAMKNIJ EKRAN ALARMOWY
     </button>
+
   </div>
+
 </div>
+
+
 <script>
+
 const TOPIC = "Cholerzyn-Kr2";
+
 let alarmTimers = [];
 let activeRequests = [];
-/* ================================
-   STATUS
-================================ */
+
+
+/* STATUS */
+
 function setStatus(message, progress = 0, alerting = false){
+
   const status =
     document.getElementById("status");
+
   const progressBar =
     document.getElementById("progress");
+
   status.textContent = message;
+
   progressBar.style.width =
     progress + "%";
+
   status.classList.toggle(
     "alerting",
     alerting
   );
 }
-/* ================================
-   NTfy
-================================ */
+
+
+/* NTFY */
+
 function publish(message, priority, tags){
+
   const url =
     "https://ntfy.sh/" +
     TOPIC +
@@ -645,200 +818,279 @@ function publish(message, priority, tags){
     priority +
     "&tags=" +
     encodeURIComponent(tags) +
-    "&cache=" +
-    "no" +
+    "&cache=no" +
     "&cb=" +
     Date.now() +
     Math.random();
-  /*
-    Używamy Image zamiast fetch().
-    Dzięki temu strona może działać
-    bez konfiguracji CORS na GitHub Pages.
-  */
+
   const img =
     new Image();
+
   img.src = url;
+
   activeRequests.push(img);
+
   setTimeout(() => {
+
     const index =
       activeRequests.indexOf(img);
+
     if(index !== -1){
+
       activeRequests.splice(
         index,
         1
       );
+
     }
+
   },15000);
 }
-/* ================================
-   WIBRACJA
-================================ */
+
+
+/* WIBRACJA */
+
 function vibrate(){
+
   if(
     navigator.vibrate &&
     typeof navigator.vibrate === "function"
   ){
+
     navigator.vibrate([
       400,
       150,
       400
     ]);
+
   }
 }
-/* ================================
-   ALARM BHP
-================================ */
+
+
+/* ALARM BHP */
+
 function alarm(){
+
   clearAlarmTimers();
+
   const mode =
     document.getElementById("alarmMode");
+
   const title =
     document.getElementById("alarmTitle");
+
   const text =
     document.getElementById("alarmText");
+
   title.textContent =
     "ALARM BHP";
+
   mode.classList.add("show");
+
   vibrate();
+
   text.textContent =
     "Pierwszy sygnał został wysłany. Drugi sygnał zostanie wysłany za 2 sekundy.";
+
   setStatus(
     "🚨 Wysyłanie sekwencji alarmowej...",
     10,
     true
   );
+
+
   /* PIERWSZY SYGNAŁ */
+
   publish(
     "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
     5,
     "rotating_light"
   );
+
+
   /* DRUGI SYGNAŁ */
+
   alarmTimers.push(
+
     setTimeout(() => {
+
       publish(
         "🚨 ALARM BHP — DRUGI SYGNAŁ — PILNE",
         5,
         "rotating_light"
       );
+
       vibrate();
+
       text.textContent =
         "Drugi sygnał wysłany. Kontrola odbioru za 8 sekund.";
+
       setStatus(
         "🚨 Wysłano 2 sygnały alarmowe",
         55,
         true
       );
+
     },2000)
+
   );
+
+
   /* KONTROLA */
+
   alarmTimers.push(
+
     setTimeout(() => {
+
       publish(
         "🟠 CZY WSZYSCY ODEBRALI ALARM?",
         4,
         "warning"
       );
+
       text.textContent =
         "Sekwencja zakończona. Sprawdź, czy wszyscy odebrali komunikat.";
+
       setStatus(
         "🟢 Sekwencja alarmowa zakończona",
         100,
         false
       );
+
     },10000)
+
   );
+
 }
-/* ================================
-   POŻAR
-================================ */
+
+
+/* POŻAR */
+
 function fireAlarm(){
+
   clearAlarmTimers();
+
   const mode =
     document.getElementById("alarmMode");
+
   const title =
     document.getElementById("alarmTitle");
+
   const text =
     document.getElementById("alarmText");
+
   title.textContent =
     "UWAGA! POŻAR";
+
   text.textContent =
     "Wysłano pilny komunikat dotyczący zagrożenia pożarowego.";
+
   mode.classList.add("show");
+
   vibrate();
+
   publish(
     "🔥 UWAGA! POŻAR — NATYCHMIAST SPRAWDŹ KOMUNIKAT I POSTĘPUJ ZGODNIE Z PROCEDURĄ",
     5,
     "fire"
   );
+
   setStatus(
     "🔥 Wysłano komunikat: UWAGA! POŻAR",
     100,
     true
   );
+
 }
-/* ================================
-   AUDYT BHP
-================================ */
+
+
+/* AUDYT BHP */
+
 function audit(){
+
   clearAlarmTimers();
+
   const mode =
     document.getElementById("alarmMode");
+
   const title =
     document.getElementById("alarmTitle");
+
   const text =
     document.getElementById("alarmText");
+
   title.textContent =
     "AUDYT BHP";
+
   text.textContent =
     "Wysłano pilny komunikat dotyczący audytu BHP.";
+
   mode.classList.add("show");
+
   vibrate();
+
   publish(
     "⚠️ AUDYT BHP — UWAGA! PILNY KOMUNIKAT — PROSIMY O PRZYGOTOWANIE",
     4,
     "warning"
   );
+
   setStatus(
     "⚠️ Wysłano komunikat: AUDYT BHP",
     100,
     true
   );
+
 }
-/* ================================
-   ZAMKNIĘCIE ALARMU
-================================ */
+
+
+/* ZAMKNIĘCIE */
+
 function closeAlarm(){
+
   const mode =
     document.getElementById("alarmMode");
+
   mode.classList.remove("show");
+
   clearAlarmTimers();
+
   setStatus(
     "System gotowy — oczekuje na komunikat.",
     0,
     false
   );
+
 }
-/* ================================
-   CZYSZCZENIE TIMERÓW
-================================ */
+
+
+/* CZYSZCZENIE TIMERÓW */
+
 function clearAlarmTimers(){
+
   alarmTimers.forEach(
     timer => clearTimeout(timer)
   );
+
   alarmTimers = [];
+
 }
-/* ================================
-   ESC — ZAMKNIĘCIE
-================================ */
+
+
+/* ESC */
+
 document.addEventListener(
   "keydown",
   function(event){
+
     if(event.key === "Escape"){
       closeAlarm();
     }
+
   }
 );
+
 </script>
+
 </body>
 </html>
