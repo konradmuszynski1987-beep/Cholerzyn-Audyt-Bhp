@@ -173,6 +173,11 @@ margin-bottom:20px;
 margin-top:0;
 }
 
+.info p{
+color:#bfc3c8;
+line-height:1.5;
+}
+
 .sequence{
 display:flex;
 justify-content:space-between;
@@ -372,7 +377,7 @@ onerror="this.style.display='none';document.getElementById('fallback').style.dis
 
 <strong>UWAGA! POŻAR</strong>
 
-<small>NATYCHMIASTOWY KOMUNIKAT</small>
+<small>SPRAWDŹ KOMUNIKAT</small>
 
 </button>
 
@@ -409,13 +414,13 @@ Gotowy do wysłania komunikatu.
 
 <div class="info">
 
-<h3>Sekwencja komunikatu</h3>
+<h3>Sekwencja alarmowa BHP</h3>
 
 <div class="sequence">
 
 <div class="step">
 <strong>0 s</strong>
-<span>Pierwszy komunikat</span>
+<span>Pierwszy alarm</span>
 </div>
 
 <div class="step">
@@ -632,7 +637,8 @@ updateStatus(
 
 /* =========================
    POŻAR
-   TAKA SAMA SEKWENCJA
+   ZOSTAWIAMY DZIAŁANIE
+   KTÓRE WCZEŚNIEJ DZIAŁAŁO
    ========================= */
 
 function fireAlarm(){
@@ -642,58 +648,18 @@ clearTimers();
 showAlarm(
 "🔥",
 "UWAGA! POŻAR",
-"NATYCHMIAST SPRAWDŹ KOMUNIKAT"
+"INFORMACJA — SPRAWDŹ KOMUNIKAT"
 );
 
 updateStatus(
-"Wysłano pierwszy komunikat o pożarze.",
-33
-);
-
-publish(
-"🔥 UWAGA! POŻAR — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
-5,
-"rotating_light,warning"
-);
-
-
-alarmTimers.push(
-
-setTimeout(function(){
-
-publish(
-"🔥 POŻAR — DRUGI SYGNAŁ — PILNE",
-5,
-"rotating_light,warning"
-);
-
-updateStatus(
-"Wysłano drugi sygnał pożarowy.",
-66
-);
-
-},2000)
-
-);
-
-
-alarmTimers.push(
-
-setTimeout(function(){
-
-publish(
-"🟠 CZY WSZYSCY ODEBRALI KOMUNIKAT?",
-5,
-"warning"
-);
-
-updateStatus(
-"Sekwencja pożarowa zakończona.",
+"Wysłano komunikat dotyczący pożaru.",
 100
 );
 
-},10000)
-
+publish(
+"🔥 UWAGA! POŻAR — SPRAWDŹ KOMUNIKAT",
+4,
+"warning"
 );
 
 }
@@ -701,7 +667,9 @@ updateStatus(
 
 /* =========================
    AUDYT BHP
-   TAKA SAMA SEKWENCJA
+   DOSTAJE DOKŁADNIE
+   TĘ SAMĄ FUNKCJĘ TECHNICZNĄ
+   CO WCZEŚNIEJ POŻAR
    ========================= */
 
 function auditAlarm(){
@@ -711,58 +679,18 @@ clearTimers();
 showAlarm(
 "⚠️",
 "AUDYT BHP",
-"NATYCHMIAST SPRAWDŹ KOMUNIKAT"
+"INFORMACJA — SPRAWDŹ KOMUNIKAT"
 );
 
 updateStatus(
-"Wysłano pierwszy komunikat audytu BHP.",
-33
-);
-
-publish(
-"⚠️ AUDYT BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
-5,
-"rotating_light,warning"
-);
-
-
-alarmTimers.push(
-
-setTimeout(function(){
-
-publish(
-"⚠️ AUDYT BHP — DRUGI SYGNAŁ — PILNE",
-5,
-"rotating_light,warning"
-);
-
-updateStatus(
-"Wysłano drugi sygnał audytu BHP.",
-66
-);
-
-},2000)
-
-);
-
-
-alarmTimers.push(
-
-setTimeout(function(){
-
-publish(
-"🟠 CZY WSZYSCY ODEBRALI KOMUNIKAT?",
-5,
-"warning"
-);
-
-updateStatus(
-"Sekwencja audytu BHP zakończona.",
+"Wysłano komunikat dotyczący audytu BHP.",
 100
 );
 
-},10000)
-
+publish(
+"⚠️ AUDYT BHP — SPRAWDŹ KOMUNIKAT",
+4,
+"warning"
 );
 
 }
