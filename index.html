@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Cholerzyn – Panel Bezpieczeństwa</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -17,14 +15,12 @@
 body{
   font-family:Arial,Helvetica,sans-serif;
   min-height:100vh;
+  color:#fff;
   background:
-    radial-gradient(circle at 15% 10%,rgba(255,210,0,.18),transparent 30%),
-    radial-gradient(circle at 90% 80%,rgba(255,60,0,.12),transparent 30%),
+    radial-gradient(circle at 15% 10%,rgba(255,210,0,.16),transparent 30%),
+    radial-gradient(circle at 90% 80%,rgba(255,70,0,.12),transparent 30%),
     #101010;
-  color:white;
 }
-
-/* HEADER */
 
 .header{
   background:#111;
@@ -38,7 +34,6 @@ body{
 .header-title{
   font-size:20px;
   font-weight:900;
-  letter-spacing:.5px;
 }
 
 .header-sub{
@@ -52,7 +47,7 @@ body{
   align-items:center;
   gap:8px;
   font-size:11px;
-  font-weight:800;
+  font-weight:900;
 }
 
 .online-dot{
@@ -63,20 +58,15 @@ body{
   box-shadow:0 0 12px rgba(34,197,94,.8);
 }
 
-/* CONTAINER */
-
 .container{
   max-width:950px;
   margin:auto;
   padding:20px;
 }
 
-/* HERO */
-
 .hero{
   min-height:260px;
-  background:
-    linear-gradient(135deg,#252525,#151515);
+  background:linear-gradient(135deg,#252525,#151515);
   border:1px solid #333;
   border-radius:25px;
   overflow:hidden;
@@ -117,7 +107,6 @@ body{
   color:#ffd400;
   font-size:11px;
   font-weight:900;
-  text-transform:uppercase;
 }
 
 .dog-box{
@@ -138,8 +127,6 @@ body{
   display:block;
   filter:drop-shadow(0 15px 15px rgba(0,0,0,.45));
 }
-
-/* STATUS */
 
 .status-card{
   margin-top:18px;
@@ -173,7 +160,6 @@ body{
   color:#888;
   font-size:13px;
   font-weight:800;
-  transition:.2s;
 }
 
 .status-message.sent{
@@ -181,8 +167,6 @@ body{
   background:rgba(34,197,94,.12);
   border-color:#22c55e;
 }
-
-/* LICZNIKI */
 
 .stats{
   margin-top:14px;
@@ -203,7 +187,6 @@ body{
   font-size:30px;
   font-weight:900;
   color:#ffd400;
-  line-height:1;
 }
 
 .stat-label{
@@ -212,10 +195,7 @@ body{
   font-size:11px;
   font-weight:900;
   letter-spacing:.8px;
-  text-transform:uppercase;
 }
-
-/* BUTTONS */
 
 .buttons{
   margin-top:18px;
@@ -273,16 +253,12 @@ body{
   line-height:1.4;
 }
 
-/* FOOTER */
-
 .footer{
   text-align:center;
   color:#555;
   font-size:10px;
   padding:22px 5px 10px;
 }
-
-/* MOBILE */
 
 @media(max-width:700px){
 
@@ -335,47 +311,17 @@ body{
   .btn-title{
     font-size:19px;
   }
-
 }
-
-@media(max-width:420px){
-
-  .header-title{
-    font-size:17px;
-  }
-
-  .hero h1{
-    font-size:22px;
-  }
-
-  .hero-text{
-    width:68%;
-  }
-
-  .dog-box{
-    width:43%;
-  }
-
-}
-
 </style>
 </head>
 
-
 <body>
-
-<!-- HEADER -->
 
 <header class="header">
 
   <div>
-    <div class="header-title">
-      CHOLERZYN
-    </div>
-
-    <div class="header-sub">
-      PANEL BEZPIECZEŃSTWA
-    </div>
+    <div class="header-title">CHOLERZYN</div>
+    <div class="header-sub">PANEL BEZPIECZEŃSTWA</div>
   </div>
 
   <div class="online">
@@ -385,11 +331,7 @@ body{
 
 </header>
 
-
 <main class="container">
-
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -407,25 +349,18 @@ body{
     </p>
 
     <div class="hero-badge">
-      🔔 System alarmowy
+      🔔 SYSTEM ALARMOWY
     </div>
 
   </div>
 
-
   <div class="dog-box">
-
     <img
       src="https://inpost.pl/sites/default/files/inline-images/Pies_36.png"
-      alt="Von Halsky"
-    >
-
+      alt="Von Halsky">
   </div>
 
 </section>
-
-
-<!-- STATUS -->
 
 <section class="status-card">
 
@@ -437,160 +372,88 @@ body{
     Gotowy do wysłania
   </div>
 
-  <div
-    id="statusMessage"
-    class="status-message"
-  >
+  <div id="statusMessage" class="status-message">
     Wybierz rodzaj komunikatu poniżej.
   </div>
 
 </section>
 
-
-<!-- LICZNIKI -->
-
 <section class="stats">
 
   <div class="stat">
-
-    <div
-      id="ackCount"
-      class="stat-number"
-    >
-      0
-    </div>
-
-    <div class="stat-label">
-      ODEBRAŁO
-    </div>
-
+    <div id="ackCount" class="stat-number">0</div>
+    <div class="stat-label">ODEBRAŁO</div>
   </div>
 
-
   <div class="stat">
-
-    <div
-      id="deviceCount"
-      class="stat-number"
-    >
-      0
-    </div>
-
-    <div class="stat-label">
-      URZĄDZENIA
-    </div>
-
+    <div id="deviceCount" class="stat-number">0</div>
+    <div class="stat-label">URZĄDZENIA</div>
   </div>
 
 </section>
-
-
-<!-- BUTTONS -->
 
 <section class="buttons">
 
+  <button class="btn bhp" onclick="sendBHP()">
 
-  <!-- BHP -->
-
-  <button
-    class="btn bhp"
-    onclick="sendBHP()"
-  >
-
-    <div class="icon">
-      🚨
-    </div>
+    <div class="icon">🚨</div>
 
     <div>
-
-      <div class="btn-title">
-        ALARM BHP
-      </div>
-
+      <div class="btn-title">ALARM BHP</div>
       <div class="btn-desc">
         Natychmiastowy alarm bezpieczeństwa
       </div>
-
     </div>
 
   </button>
 
 
-  <!-- POŻAR -->
+  <button class="btn fire" onclick="sendFire()">
 
-  <button
-    class="btn fire"
-    onclick="sendFire()"
-  >
-
-    <div class="icon">
-      🔥
-    </div>
+    <div class="icon">🔥</div>
 
     <div>
-
-      <div class="btn-title">
-        UWAGA! POŻAR
-      </div>
-
+      <div class="btn-title">UWAGA! POŻAR</div>
       <div class="btn-desc">
         Pilny komunikat pożarowy
       </div>
-
     </div>
 
   </button>
 
 
-  <!-- AUDYT -->
+  <button class="btn audit" onclick="sendAudit()">
 
-  <button
-    class="btn audit"
-    onclick="sendAudit()"
-  >
-
-    <div class="icon">
-      ⚠️
-    </div>
+    <div class="icon">⚠️</div>
 
     <div>
-
-      <div class="btn-title">
-        AUDYT BHP
-      </div>
-
+      <div class="btn-title">AUDYT BHP</div>
       <div class="btn-desc">
         Komunikat dotyczący kontroli BHP
       </div>
-
     </div>
 
   </button>
 
-
 </section>
-
 
 <div class="footer">
   Panel wewnętrzny • Cholerzyn • NTFY
 </div>
 
-
 </main>
-
 
 <script>
 
-
-/* ========================================
-   NTFY
-   TEN MECHANIZM ZOSTAWIAMY BEZ ZMIAN
-======================================== */
-
 const TOPIC = "Cholerzyn-Kr2";
 
-let activeRequests = [];
 
+/*
+========================================
+  WYSYŁANIE NTFY
+  GET /publish
+========================================
+*/
 
 function publish(message, priority, tags){
 
@@ -600,57 +463,54 @@ function publish(message, priority, tags){
     "/publish?message=" +
     encodeURIComponent(message) +
     "&priority=" +
-    priority +
+    encodeURIComponent(priority) +
     "&tags=" +
     encodeURIComponent(tags) +
     "&cache=no&cb=" +
     Date.now();
 
+  /*
+    Tworzymy zwykły formularz GET.
+    Przeglądarka wykona normalne żądanie
+    do dokładnie tego samego adresu,
+    który wcześniej działał po ręcznym otwarciu.
+  */
 
-  const img = new Image();
+  const form = document.createElement("form");
 
+  form.method = "GET";
+  form.action = url;
+  form.target = "_blank";
+  form.style.display = "none";
 
-  img.onload = function(){
+  document.body.appendChild(form);
 
-    console.log("Komunikat wysłany");
+  form.submit();
 
-  };
-
-
-  img.onerror = function(){
-
-    console.log("Żądanie wysłane");
-
-  };
-
-
-  img.src = url;
-
-
-  activeRequests.push(img);
-
+  setTimeout(function(){
+    form.remove();
+  },1000);
 }
 
 
-/* ========================================
-   STATUS
-======================================== */
+/*
+========================================
+  STATUS
+========================================
+*/
 
 function showSent(name){
 
   const box =
     document.getElementById("statusMessage");
 
-
   box.classList.add("sent");
-
 
   box.innerHTML =
     "🟢 KOMUNIKAT WYSŁANY<br>" +
     "<span style='font-weight:normal'>" +
     name +
     "</span>";
-
 
   setTimeout(function(){
 
@@ -660,28 +520,27 @@ function showSent(name){
       "Wybierz rodzaj komunikatu poniżej.";
 
   },5000);
-
 }
 
 
-/* ========================================
-   ALARM BHP
-   0 SEKUND
-   2 SEKUNDY
-   10 SEKUND
-======================================== */
+/*
+========================================
+  ALARM BHP
+  0s
+  2s
+  10s
+========================================
+*/
 
 function sendBHP(){
 
   showSent("ALARM BHP");
-
 
   publish(
     "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
     5,
     "rotating_light,warning"
   );
-
 
   setTimeout(function(){
 
@@ -693,7 +552,6 @@ function sendBHP(){
 
   },2000);
 
-
   setTimeout(function(){
 
     publish(
@@ -703,49 +561,44 @@ function sendBHP(){
     );
 
   },10000);
-
 }
 
 
-/* ========================================
-   POŻAR
-   JEDEN KOMUNIKAT
-======================================== */
+/*
+========================================
+  POŻAR
+  JEDEN KOMUNIKAT
+========================================
+*/
 
 function sendFire(){
 
   showSent("UWAGA! POŻAR");
-
 
   publish(
     "🔥 UWAGA! POŻAR — SPRAWDŹ KOMUNIKAT",
     4,
     "warning"
   );
-
 }
 
 
-/* ========================================
-   AUDYT BHP
-   IDENTYCZNA SEKWENCJA JAK ALARM BHP
-======================================== */
+/*
+========================================
+  AUDYT BHP
+  IDENTYCZNA SEKWENCJA JAK ALARM BHP
+========================================
+*/
 
 function sendAudit(){
 
   showSent("AUDYT BHP");
-
-
-  /* 0 SEKUND */
 
   publish(
     "⚠️ AUDYT BHP — SPRAWDŹ KOMUNIKAT",
     5,
     "warning"
   );
-
-
-  /* 2 SEKUNDY */
 
   setTimeout(function(){
 
@@ -757,23 +610,10 @@ function sendAudit(){
 
   },2000);
 
-
-  /* 10 SEKUND */
-
   setTimeout(function(){
 
     publish(
       "🟠 CZY WSZYSCY ODEBRALI AUDYT BHP?",
       5,
       "warning"
-    );
-
-  },10000);
-
-}
-
-
-</script>
-
-</body>
-</html>
+   
