@@ -171,7 +171,7 @@ body{
 .stats{
   margin-top:14px;
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr;
   gap:12px;
 }
 
@@ -383,12 +383,7 @@ body{
 
   <div class="stat">
     <div id="ackCount" class="stat-number">0</div>
-    <div class="stat-label">ODEBRAŁO</div>
-  </div>
-
-  <div class="stat">
-    <div id="deviceCount" class="stat-number">0</div>
-    <div class="stat-label">URZĄDZENIA</div>
+    <div class="stat-label">🟢 ODEBRAŁO OSTATNI ALARM</div>
   </div>
 
 </section>
@@ -428,52 +423,297 @@ body{
 </section>
 
 <div class="footer">
-  Panel wewnętrzny • Cholerzyn • NTFY
+  Panel wewnętrzny • Cholerzyn • NTFY • SUPABASE
 </div>
 
 </main>
+
+
+<!-- ========================================
+     SUPABASE
+======================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
 const TOPIC = "Cholerzyn-Kr2";
 
+const SUPABASE_URL =
+  "https://mleqpnxljfzazcyddolk.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_RTR7UsXVJf0RKFC6RRS-Qw_IBdtzKDI";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+// ========================================
+// ANONIMOWE ID URZĄDZENIA
+// ========================================
+
+function getDeviceId(){
+
+  let id =
+    localStorage.getItem("cholerzyn_device_id");
+
+  if(!id){
+
+    if(
+      window.crypto &&
+      crypto.randomUUID
+    ){
+
+      id = crypto.randomUUID();
+
+    }else{
+
+      id =
+        "device-" +
+        Date.now() +
+        "-" +
+        Math.random()
+          .toString(16)
+          .substring(2,10);
+
+    }
+
+    localStorage.setItem(
+      "cholerzyn_device_id",
+      id
+    );
+  }
+
+  return id;
+}
+
+
+// ========================================
+// ID ALARMU
+// ========================================
+
+function createEventId(){
+
+  return (
+    Date.now().toString(36) +
+    "-" +
+    Math.random()
+      .toString(36)
+      .substring(2,10)
+  );
+}
+
+
+// ========================================
+// ZAPIS WYSŁANIA ALARMU
+// ========================================
+
+function saveSent(eventId, alarmType){
+
+  supabaseClient
+    .from("feedback_events")
+    .insert({
+      event_id: eventId,
+      event_type: "sent",
+      device_id: getDeviceId()
+    })
+    .then(function(result){
+
+      if(result.error){
+
+        console.error(
+          "SUPABASE SENT ERROR:",
+          result.error
+        );
+
+      }else{
+
+        console.log(
+          "SUPABASE: zapisano alarm",
+          alarmType,
+          eventId
+        );
+
+      }
+
+    });
+
+}
+
+
+// ========================================
+// ZAPIS ODBIORU
+// ========================================
+
+function saveAck(eventId){
+
+  const deviceId =
+    getDeviceId();
+
+  supabaseClient
+    .from("feedback_events")
+    .insert({
+      event_id: eventId,
+      event_type: "ack",
+      device_id: deviceId
+    })
+    .then(function(result){
+
+      if(result.error){
+
+        console.error(
+          "SUPABASE ACK ERROR:",
+          result.error
+        );
+
+      }else{
+
+        console.log(
+          "SUPABASE: ODEBRANO",
+          eventId,
+          deviceId
+        );
+
+        loadAckCount(eventId);
+
+      }
+
+    });
+
+}
+
+
+// ========================================
+// LICZNIK ODBIORÓW
+// ========================================
+
+function loadAckCount(eventId){
+
+  supabaseClient
+    .from("feedback_events")
+    .select("device_id")
+    .eq("event_id", eventId)
+    .eq("event_type", "ack")
+    .then(function(result){
+
+      if(result.error){
+
+        console.error(
+          "SUPABASE COUNT ERROR:",
+          result.error
+        );
+
+        return;
+      }
+
+      const uniqueDevices =
+        new Set(
+          (result.data || [])
+            .map(function(row){
+              return row.device_id;
+            })
+        );
+
+      document.getElementById(
+        "ackCount"
+      ).innerText =
+        uniqueDevices.size;
+
+    });
+
+}
+
+
+// ========================================
+// OSTATNI ALARM
+// ========================================
+
+let currentEventId = null;
+
 
 // ========================================
 // NTFY
-// Oficjalny endpoint POST
 // ========================================
 
-function publish(message, priority, tags){
+function publish(
+  message,
+  priority,
+  tags,
+  eventId
+){
 
-  const url = "https://ntfy.sh/" + TOPIC;
+  const url =
+    "https://ntfy.sh/" + TOPIC;
+
+  const ackUrl =
+    window.location.origin +
+    window.location.pathname +
+    "?ack=" +
+    encodeURIComponent(eventId);
+
 
   return fetch(url, {
-    method: "POST",
-    mode: "cors",
-    cache: "no-store",
-    headers: {
-      "Content-Type": "text/plain",
-      "Priority": String(priority),
-      "Tags": tags
+
+    method:"POST",
+
+    mode:"cors",
+
+    cache:"no-store",
+
+    headers:{
+
+      "Content-Type":"text/plain",
+
+      "Priority":
+        String(priority),
+
+      "Tags":
+        tags,
+
+      "Click":
+        ackUrl
+
     },
-    body: message
+
+    body:message
+
   })
+
   .then(function(response){
 
     if(!response.ok){
-      throw new Error("NTFY HTTP " + response.status);
+
+      throw new Error(
+        "NTFY HTTP " +
+        response.status
+      );
+
     }
 
-    console.log("NTFY: wysłano", message);
+    console.log(
+      "NTFY: wysłano",
+      message
+    );
 
     return true;
+
   })
+
   .catch(function(error){
 
-    console.error("NTFY ERROR:", error);
+    console.error(
+      "NTFY ERROR:",
+      error
+    );
 
     return false;
+
   });
+
 }
 
 
@@ -483,7 +723,10 @@ function publish(message, priority, tags){
 
 function showSent(name){
 
-  const box = document.getElementById("statusMessage");
+  const box =
+    document.getElementById(
+      "statusMessage"
+    );
 
   box.classList.add("sent");
 
@@ -501,6 +744,58 @@ function showSent(name){
       "Wybierz rodzaj komunikatu poniżej.";
 
   },5000);
+
+}
+
+
+// ========================================
+// OBSŁUGA ODEBRANIA
+// ========================================
+
+function checkAck(){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const ack =
+    params.get("ack");
+
+  if(!ack){
+    return;
+  }
+
+
+  // Zapisujemy odbiór
+  saveAck(ack);
+
+
+  // Pokazujemy potwierdzenie
+  const box =
+    document.getElementById(
+      "statusMessage"
+    );
+
+  box.classList.add("sent");
+
+  box.innerHTML =
+    "🟢 KOMUNIKAT ODEBRANY<br>" +
+    "<span style='font-weight:normal'>" +
+    "Potwierdzenie zostało zapisane." +
+    "</span>";
+
+
+  // Usuwamy parametr ?ack= z adresu
+  // żeby odświeżenie strony
+  // nie powodowało ponownego zapisu
+
+  window.history.replaceState(
+    {},
+    document.title,
+    window.location.pathname
+  );
+
 }
 
 
@@ -510,33 +805,68 @@ function showSent(name){
 
 function sendBHP(){
 
-  showSent("ALARM BHP");
+  const eventId =
+    createEventId();
+
+  currentEventId =
+    eventId;
+
+  document.getElementById(
+    "ackCount"
+  ).innerText = "0";
+
+
+  // Supabase zapisuje alarm
+  // niezależnie od NTFY
+
+  saveSent(
+    eventId,
+    "ALARM BHP"
+  );
+
+
+  showSent(
+    "ALARM BHP"
+  );
+
+
+  // PIERWSZY SYGNAŁ
 
   publish(
     "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
     5,
-    "rotating_light,warning"
+    "rotating_light,warning",
+    eventId
   );
+
+
+  // DRUGI SYGNAŁ
 
   setTimeout(function(){
 
     publish(
       "🚨 ALARM BHP — DRUGI SYGNAŁ — PILNE",
       5,
-      "rotating_light,warning"
+      "rotating_light,warning",
+      eventId
     );
 
   },2000);
+
+
+  // PRZYPOMNIENIE
 
   setTimeout(function(){
 
     publish(
       "🟠 CZY WSZYSCY ODEBRALI ALARM?",
       5,
-      "warning"
+      "warning",
+      eventId
     );
 
   },10000);
+
 }
 
 
@@ -546,13 +876,35 @@ function sendBHP(){
 
 function sendFire(){
 
-  showSent("UWAGA! POŻAR");
+  const eventId =
+    createEventId();
+
+  currentEventId =
+    eventId;
+
+  document.getElementById(
+    "ackCount"
+  ).innerText = "0";
+
+
+  saveSent(
+    eventId,
+    "UWAGA! POŻAR"
+  );
+
+
+  showSent(
+    "UWAGA! POŻAR"
+  );
+
 
   publish(
     "🔥 UWAGA! POŻAR — SPRAWDŹ KOMUNIKAT",
     4,
-    "warning"
+    "warning",
+    eventId
   );
+
 }
 
 
@@ -562,34 +914,73 @@ function sendFire(){
 
 function sendAudit(){
 
-  showSent("AUDYT BHP");
+  const eventId =
+    createEventId();
+
+  currentEventId =
+    eventId;
+
+  document.getElementById(
+    "ackCount"
+  ).innerText = "0";
+
+
+  saveSent(
+    eventId,
+    "AUDYT BHP"
+  );
+
+
+  showSent(
+    "AUDYT BHP"
+  );
+
+
+  // PIERWSZY SYGNAŁ
 
   publish(
     "⚠️ AUDYT BHP — SPRAWDŹ KOMUNIKAT",
     5,
-    "warning"
+    "warning",
+    eventId
   );
+
+
+  // DRUGI SYGNAŁ
 
   setTimeout(function(){
 
     publish(
       "⚠️ AUDYT BHP — DRUGI SYGNAŁ — PILNE",
       5,
-      "warning"
+      "warning",
+      eventId
     );
 
   },2000);
+
+
+  // PRZYPOMNIENIE
 
   setTimeout(function(){
 
     publish(
       "🟠 CZY WSZYSCY ODEBRALI AUDYT BHP?",
       5,
-      "warning"
+      "warning",
+      eventId
     );
 
   },10000);
+
 }
+
+
+// ========================================
+// START
+// ========================================
+
+checkAck();
 
 </script>
 
