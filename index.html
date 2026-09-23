@@ -4,708 +4,619 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cholerzyn - Panel Bezpieczeństwa</title>
+<title>Cholerzyn – Panel Bezpieczeństwa</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #111;
-  color: white;
-  text-align: center;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,220,0,.18), transparent 28%),
+    radial-gradient(circle at 90% 80%, rgba(255,70,0,.12), transparent 30%),
+    #101010;
+  color:#fff;
+  min-height:100vh;
 }
 
-.header {
-  background: #222;
-  padding: 20px 10px;
-  border-bottom: 3px solid #444;
+.header{
+  background:#111;
+  border-bottom:3px solid #ffd400;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.header h1 {
-  margin: 0;
-  font-size: 28px;
+.header-title{
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:.5px;
 }
 
-.header p {
-  margin: 8px 0 0;
-  color: #bbb;
-  font-size: 15px;
+.header-sub{
+  font-size:12px;
+  color:#aaa;
+  margin-top:4px;
 }
 
-.container {
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:bold;
 }
 
-.status {
-  background: #1d1d1d;
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 20px;
+.status-dot{
+  width:10px;
+  height:10px;
+  background:#22c55e;
+  border-radius:50%;
+  box-shadow:0 0 12px rgba(34,197,94,.8);
 }
 
-.status-title {
-  font-size: 16px;
-  color: #aaa;
-  margin-bottom: 8px;
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
 }
 
-.stats {
-  display: flex;
-  justify-content: space-around;
-  gap: 10px;
+.hero{
+  background:
+    linear-gradient(135deg,#242424,#141414);
+  border:1px solid #333;
+  border-radius:26px;
+  padding:22px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 15px 45px rgba(0,0,0,.35);
 }
 
-.stat {
-  flex: 1;
-  background: #292929;
-  border-radius: 10px;
-  padding: 12px;
+.hero:after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  background:#ffd400;
+  opacity:.08;
+  border-radius:50%;
+  right:-60px;
+  top:-60px;
 }
 
-.stat-number {
-  font-size: 28px;
-  font-weight: bold;
+.hero-text{
+  flex:1;
+  position:relative;
+  z-index:2;
 }
 
-.stat-label {
-  font-size: 12px;
-  color: #aaa;
-  margin-top: 4px;
+.hero h1{
+  font-size:28px;
+  font-weight:900;
+  line-height:1.05;
 }
 
-button {
-  width: 100%;
-  border: none;
-  border-radius: 15px;
-  color: white;
-  font-size: 22px;
-  font-weight: bold;
-  padding: 25px 15px;
-  margin: 10px 0;
-  cursor: pointer;
+.hero p{
+  color:#bbb;
+  margin-top:10px;
+  font-size:14px;
+  line-height:1.45;
 }
 
-button:active {
-  transform: scale(0.98);
+.dog{
+  width:150px;
+  min-width:150px;
+  position:relative;
+  z-index:2;
 }
 
-.bhp {
-  background: #d40000;
+.dog svg{
+  width:100%;
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 10px 15px rgba(0,0,0,.4));
 }
 
-.fire {
-  background: #ff6500;
+.info{
+  margin-top:18px;
+  background:#181818;
+  border:1px solid #303030;
+  border-radius:18px;
+  padding:16px;
 }
 
-.audit {
-  background: #d49b00;
+.info-title{
+  font-size:13px;
+  color:#999;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-weight:bold;
 }
 
-.info {
-  background: #202020;
-  border-radius: 12px;
-  padding: 15px;
-  margin-top: 20px;
-  color: #ccc;
-  font-size: 14px;
+.info-main{
+  font-size:18px;
+  font-weight:900;
+  margin-top:5px;
 }
 
-.ack {
-  background: #075c2d;
-  border-radius: 12px;
-  padding: 18px;
-  margin-top: 20px;
-  display: none;
+.status-message{
+  margin-top:14px;
+  padding:13px 15px;
+  border-radius:13px;
+  background:#202020;
+  border:1px solid #333;
+  color:#aaa;
+  font-size:13px;
+  font-weight:bold;
+  text-align:center;
+  transition:.25s;
 }
 
-.ack strong {
-  font-size: 20px;
+.status-message.sent{
+  background:rgba(34,197,94,.12);
+  border-color:#22c55e;
+  color:#6ee7a0;
 }
 
-.footer {
-  color: #666;
-  font-size: 12px;
-  margin-top: 30px;
-  padding-bottom: 20px;
+.buttons{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+}
+
+.btn{
+  width:100%;
+  min-height:92px;
+  border:none;
+  border-radius:20px;
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+  text-align:left;
+  padding:18px 20px;
+  position:relative;
+  overflow:hidden;
+  transition:transform .12s,filter .12s;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+.btn:active{
+  transform:scale(.98);
+}
+
+.btn:hover{
+  filter:brightness(1.08);
+}
+
+.btn-icon{
+  font-size:30px;
+  margin-bottom:7px;
+}
+
+.btn-title{
+  font-size:20px;
+}
+
+.btn-desc{
+  font-size:12px;
+  opacity:.8;
+  margin-top:3px;
+}
+
+.bhp{
+  background:linear-gradient(135deg,#d60000,#920000);
+}
+
+.fire{
+  background:linear-gradient(135deg,#ff5a00,#c92500);
+}
+
+.audit{
+  background:linear-gradient(135deg,#d9ae00,#8d7100);
+}
+
+.footer{
+  text-align:center;
+  color:#666;
+  font-size:11px;
+  padding:22px 10px 12px;
+}
+
+@media(min-width:700px){
+  .buttons{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .btn{
+    min-height:190px;
+  }
+
+  .btn-icon{
+    font-size:40px;
+    margin-bottom:15px;
+  }
+
+  .btn-title{
+    font-size:21px;
+  }
+}
+
+@media(max-width:480px){
+  .hero{
+    padding:18px;
+  }
+
+  .hero h1{
+    font-size:23px;
+  }
+
+  .dog{
+    width:105px;
+    min-width:105px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <h1>🚨 CHOLERZYN</h1>
-  <p>Panel Bezpieczeństwa</p>
-</div>
-
-<div class="container">
+<header class="header">
+  <div>
+    <div class="header-title">CHOLERZYN</div>
+    <div class="header-sub">PANEL BEZPIECZEŃSTWA</div>
+  </div>
 
   <div class="status">
-    <div class="status-title">📊 STATUS KOMUNIKACJI</div>
+    <span class="status-dot"></span>
+    SYSTEM ONLINE
+  </div>
+</header>
 
-    <div class="stats">
+<main class="container">
 
-      <div class="stat">
-        <div class="stat-number" id="sentCount">0</div>
-        <div class="stat-label">WYSŁANE</div>
-      </div>
+  <section class="hero">
 
-      <div class="stat">
-        <div class="stat-number" id="ackCount">0</div>
-        <div class="stat-label">ODEBRANO</div>
-      </div>
+    <div class="hero-text">
+      <h1>Centrum<br>Bezpieczeństwa</h1>
 
-      <div class="stat">
-        <div class="stat-number" id="deviceCount">0</div>
-        <div class="stat-label">URZĄDZENIA</div>
-      </div>
+      <p>
+        Szybkie wysyłanie najważniejszych komunikatów
+        do urządzeń pracowników.
+      </p>
+    </div>
+
+    <div class="dog">
+
+      <!-- Własna ilustracja psa – bez zewnętrznego pliku -->
+      <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- cień -->
+        <ellipse cx="110" cy="202" rx="65" ry="10"
+                 fill="#000" opacity=".35"/>
+
+        <!-- ciało -->
+        <ellipse cx="112" cy="135" rx="57" ry="65"
+                 fill="#e5b51a"/>
+
+        <!-- kamizelka -->
+        <path d="M61 122 Q110 103 161 122 L154 167
+                 Q110 181 68 167Z"
+              fill="#171717"/>
+
+        <path d="M70 126 Q110 111 152 126"
+              stroke="#ffd400"
+              stroke-width="9"
+              fill="none"/>
+
+        <!-- głowa -->
+        <ellipse cx="110" cy="80" rx="58" ry="54"
+                 fill="#f1c52b"/>
+
+        <!-- uszy -->
+        <path d="M62 48 Q25 30 34 91 Q42 112 68 91Z"
+              fill="#9a7210"/>
+
+        <path d="M158 48 Q195 30 186 91 Q178 112 152 91Z"
+              fill="#9a7210"/>
+
+        <!-- pysk -->
+        <ellipse cx="110" cy="92" rx="35" ry="29"
+                 fill="#f6d66b"/>
+
+        <!-- oczy -->
+        <ellipse cx="88" cy="72" rx="8" ry="10"
+                 fill="#171717"/>
+
+        <ellipse cx="132" cy="72" rx="8" ry="10"
+                 fill="#171717"/>
+
+        <!-- błysk -->
+        <circle cx="91" cy="69" r="2.5" fill="#fff"/>
+        <circle cx="135" cy="69" r="2.5" fill="#fff"/>
+
+        <!-- nos -->
+        <ellipse cx="110" cy="91" rx="13" ry="9"
+                 fill="#171717"/>
+
+        <!-- uśmiech -->
+        <path d="M110 98 Q110 112 98 114"
+              stroke="#171717"
+              stroke-width="4"
+              fill="none"
+              stroke-linecap="round"/>
+
+        <path d="M110 98 Q110 112 122 114"
+              stroke="#171717"
+              stroke-width="4"
+              fill="none"
+              stroke-linecap="round"/>
+
+        <!-- łapy -->
+        <ellipse cx="73" cy="169" rx="17" ry="31"
+                 fill="#e5b51a"/>
+
+        <ellipse cx="147" cy="169" rx="17" ry="31"
+                 fill="#e5b51a"/>
+
+        <!-- łapy dół -->
+        <ellipse cx="73" cy="190" rx="18" ry="9"
+                 fill="#b88c10"/>
+
+        <ellipse cx="147" cy="190" rx="18" ry="9"
+                 fill="#b88c10"/>
+
+      </svg>
 
     </div>
-  </div>
 
-  <button class="bhp" onclick="sendBhp()">
-    🚨 ALARM BHP
-  </button>
+  </section>
 
-  <button class="fire" onclick="sendFire()">
-    🔥 UWAGA! POŻAR
-  </button>
+  <section class="info">
 
-  <button class="audit" onclick="sendAudit()">
-    ⚠️ AUDYT BHP
-  </button>
+    <div class="info-title">Status komunikacji</div>
 
-  <div id="ackBox" class="ack">
-    <strong>✅ ODEBRANO</strong>
-    <br><br>
-    Potwierdzenie zostało zapisane.
-  </div>
+    <div class="info-main">
+      Gotowy do wysłania
+    </div>
 
-  <div class="info">
-    Po wysłaniu komunikatu użytkownik otrzyma powiadomienie
-    na urządzeniu Zebra. W powiadomieniu może nacisnąć
-    <b>ODEBRANO</b>.
-  </div>
+    <div id="statusMessage" class="status-message">
+      Wybierz rodzaj komunikatu poniżej.
+    </div>
+
+  </section>
+
+  <section class="buttons">
+
+    <button class="btn bhp" onclick="sendBHP()">
+
+      <div class="btn-icon">🚨</div>
+
+      <div class="btn-title">
+        ALARM BHP
+      </div>
+
+      <div class="btn-desc">
+        Natychmiastowy alarm bezpieczeństwa
+      </div>
+
+    </button>
+
+
+    <button class="btn fire" onclick="sendFire()">
+
+      <div class="btn-icon">🔥</div>
+
+      <div class="btn-title">
+        UWAGA! POŻAR
+      </div>
+
+      <div class="btn-desc">
+        Pilny komunikat pożarowy
+      </div>
+
+    </button>
+
+
+    <button class="btn audit" onclick="sendAudit()">
+
+      <div class="btn-icon">⚠️</div>
+
+      <div class="btn-title">
+        AUDYT BHP
+      </div>
+
+      <div class="btn-desc">
+        Komunikat dotyczący kontroli BHP
+      </div>
+
+    </button>
+
+  </section>
 
   <div class="footer">
-    Cholerzyn-Kr2 • Panel Bezpieczeństwa
+    Panel wewnętrzny • Cholerzyn • System powiadomień NTFY
   </div>
 
-</div>
+</main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
 const TOPIC = "Cholerzyn-Kr2";
 
-const SUPABASE_URL =
-  "https://mleqpnxljfzazcyddolk.supabase.co";
-
-
-/* =====================================================
-   TUTAJ WKLEJ SWÓJ KLUCZ SUPABASE
-   ===================================================== */
-
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_RTR7UsXVJf0RKFC6RRS-Qw_IBdtzKDI";
-
-
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-
-
-/* =====================================================
-   IDENTYFIKACJA URZĄDZENIA
-   ===================================================== */
-
-function getDeviceId() {
-
-  let id =
-    localStorage.getItem("cholerzyn_device_id");
-
-  if (!id) {
-
-    if (
-      window.crypto &&
-      crypto.randomUUID
-    ) {
-
-      id = crypto.randomUUID();
-
-    } else {
-
-      id =
-        "device-" +
-        Date.now() +
-        "-" +
-        Math.random()
-          .toString(16)
-          .substring(2);
-
-    }
-
-    localStorage.setItem(
-      "cholerzyn_device_id",
-      id
-    );
-  }
-
-  return id;
-}
-
-
-/* =====================================================
-   ID ALARMU
-   ===================================================== */
-
-function createEventId() {
-
-  return (
-    Date.now().toString(36) +
-    "-" +
-    Math.random()
-      .toString(36)
-      .substring(2, 10)
-  );
-
-}
-
-
-/* =====================================================
-   ZAPIS WYSŁANEGO ALARMU
-   ===================================================== */
-
-async function saveSentEvent(
-  eventType,
-  eventId
-) {
-
-  try {
-
-    await supabaseClient
-      .from("feedback_events")
-      .insert({
-
-        event_type: eventType,
-
-        device_id: "ADMIN",
-
-        event_id: eventId
-
-      });
-
-    loadStats();
-
-  } catch (error) {
-
-    console.log(
-      "Błąd zapisu wysłanego alarmu:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   ZAPIS ODEBRANIA
-   ===================================================== */
-
-async function saveAcknowledgement(
-  eventId
-) {
-
-  if (!eventId) {
-    return;
-  }
-
-  try {
-
-    const deviceId =
-      getDeviceId();
-
-    const result =
-      await supabaseClient
-        .from("feedback_events")
-        .insert({
-
-          event_type: "ack",
-
-          device_id: deviceId,
-
-          event_id: eventId
-
-        });
-
-    if (result.error) {
-
-      console.log(
-        "Błąd potwierdzenia:",
-        result.error
-      );
-
-    } else {
-
-      showAck();
-
-      loadStats();
-
-    }
-
-  } catch (error) {
-
-    console.log(
-      "Błąd:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   SPRAWDZENIE ODEBRANIA
-   ===================================================== */
-
-function checkAcknowledgement() {
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-  const eventId =
-    params.get("ack");
-
-  if (eventId) {
-
-    saveAcknowledgement(
-      eventId
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   POKAZANIE ODEBRANO
-   ===================================================== */
-
-function showAck() {
-
-  const box =
-    document.getElementById(
-      "ackBox"
-    );
-
-  if (box) {
-
-    box.style.display =
-      "block";
-
-  }
-
-}
-
-
-/* =====================================================
-   STATYSTYKI
-   ===================================================== */
-
-async function loadStats() {
-
-  try {
-
-    const result =
-      await supabaseClient
-        .from("feedback_events")
-        .select(
-          "event_type,device_id,event_id"
-        );
-
-    if (result.error) {
-
-      console.log(
-        "Błąd statystyk:",
-        result.error
-      );
-
-      return;
-    }
-
-    const rows =
-      result.data || [];
-
-
-    const sent =
-      rows.filter(
-        row =>
-          row.event_type === "sent"
-      );
-
-
-    const acks =
-      rows.filter(
-        row =>
-          row.event_type === "ack"
-      );
-
-
-    const devices =
-      new Set(
-        acks
-          .map(
-            row =>
-              row.device_id
-          )
-          .filter(Boolean)
-      );
-
-
-    document.getElementById(
-      "sentCount"
-    ).textContent =
-      sent.length;
-
-
-    document.getElementById(
-      "ackCount"
-    ).textContent =
-      acks.length;
-
-
-    document.getElementById(
-      "deviceCount"
-    ).textContent =
-      devices.size;
-
-
-  } catch (error) {
-
-    console.log(
-      "Błąd ładowania statystyk:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   WYSYŁANIE NTFY
-   ===================================================== */
-
 let activeRequests = [];
 
 
-function publish(
-  message,
-  priority,
-  tags,
-  eventId
-) {
+/* =========================
+   WYSYŁANIE NTFY
+========================= */
 
-  const ackUrl =
-    window.location.origin +
-    window.location.pathname +
-    "?ack=" +
-    encodeURIComponent(
-      eventId
-    );
-
-
-  const action =
-    "view, ODEBRANO, " +
-    ackUrl +
-    ", clear=true";
-
+function publish(message, priority, tags){
 
   const url =
     "https://ntfy.sh/" +
     TOPIC +
     "/publish?message=" +
-    encodeURIComponent(
-      message
-    ) +
+    encodeURIComponent(message) +
     "&priority=" +
     priority +
     "&tags=" +
-    encodeURIComponent(
-      tags
-    ) +
-    "&actions=" +
-    encodeURIComponent(
-      action
-    ) +
+    encodeURIComponent(tags) +
     "&cache=no&cb=" +
     Date.now();
 
+  const img = new Image();
 
-  const img =
-    new Image();
+  img.onload = function(){
+    console.log("Komunikat wysłany");
+  };
 
-
-  img.onload =
-    function() {
-
-      console.log(
-        "Komunikat wysłany"
-      );
-
-    };
-
-
-  img.onerror =
-    function() {
-
-      console.log(
-        "Żądanie wysłane"
-      );
-
-    };
-
+  img.onerror = function(){
+    console.log("Żądanie wysłane");
+  };
 
   img.src = url;
 
-
-  activeRequests.push(
-    img
-  );
-
+  activeRequests.push(img);
 }
 
 
-/* =====================================================
+/* =========================
+   STATUS NA EKRANIE
+========================= */
+
+function showSent(text){
+
+  const box = document.getElementById("statusMessage");
+
+  box.classList.add("sent");
+
+  box.innerHTML =
+    "🟢 KOMUNIKAT WYSŁANY<br>" +
+    "<span style='font-weight:normal'>" +
+    text +
+    "</span>";
+
+  setTimeout(function(){
+
+    box.classList.remove("sent");
+
+    box.innerHTML =
+      "Wybierz rodzaj komunikatu poniżej.";
+
+  },5000);
+}
+
+
+/* =========================
    ALARM BHP
-   ===================================================== */
+   0s
+   2s
+   10s
+========================= */
 
-async function sendBhp() {
+function sendBHP(){
 
-  const eventId =
-    createEventId();
-
-
-  await saveSentEvent(
-    "sent",
-    eventId
-  );
-
+  showSent("ALARM BHP");
 
   publish(
     "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
     5,
-    "rotating_light,warning",
-    eventId
+    "rotating_light,warning"
   );
 
+  setTimeout(function(){
 
-  setTimeout(
-    function() {
+    publish(
+      "🚨 ALARM BHP — DRUGI SYGNAŁ — PILNE",
+      5,
+      "rotating_light,warning"
+    );
 
-      publish(
-        "🚨 ALARM BHP — DRUGI SYGNAŁ — PILNE",
-        5,
-        "rotating_light,warning",
-        eventId
-      );
-
-    },
-    2000
-  );
+  },2000);
 
 
-  setTimeout(
-    function() {
+  setTimeout(function(){
 
-      publish(
-        "🟠 CZY WSZYSCY ODEBRALI ALARM?",
-        5,
-        "warning",
-        eventId
-      );
+    publish(
+      "🟠 CZY WSZYSCY ODEBRALI ALARM?",
+      5,
+      "warning"
+    );
 
-    },
-    10000
-  );
+  },10000);
 
 }
 
 
-/* =====================================================
+/* =========================
    POŻAR
-   ===================================================== */
+   JEDEN KOMUNIKAT
+========================= */
 
-async function sendFire() {
+function sendFire(){
 
-  const eventId =
-    createEventId();
-
-
-  await saveSentEvent(
-    "sent",
-    eventId
-  );
-
+  showSent("UWAGA! POŻAR");
 
   publish(
     "🔥 UWAGA! POŻAR — SPRAWDŹ KOMUNIKAT",
     4,
-    "warning",
-    eventId
+    "warning"
   );
 
 }
 
 
-/* =====================================================
+/* =========================
    AUDYT BHP
-   ===================================================== */
+   IDENTYCZNA SEKWENCJA
+   JAK ALARM BHP
+========================= */
 
-async function sendAudit() {
+function sendAudit(){
 
-  const eventId =
-    createEventId();
-
-
-  await saveSentEvent(
-    "sent",
-    eventId
-  );
-
+  showSent("AUDYT BHP");
 
   publish(
-    "⚠️ AUDYT — SPRAWDŹ KOMUNIKAT",
-    4,
-    "warning",
-    eventId
+    "⚠️ AUDYT BHP — SPRAWDŹ KOMUNIKAT",
+    5,
+    "warning"
   );
 
+
+  setTimeout(function(){
+
+    publish(
+      "⚠️ AUDYT BHP — DRUGI SYGNAŁ — PILNE",
+      5,
+      "warning"
+    );
+
+  },2000);
+
+
+  setTimeout(function(){
+
+    publish(
+      "🟠 CZY WSZYSCY ODEBRALI AUDYT BHP?",
+      5,
+      "warning"
+    );
+
+  },10000);
+
 }
-
-
-/* =====================================================
-   START
-   ===================================================== */
-
-checkAcknowledgement();
-
-loadStats();
 
 </script>
 
 </body>
-</html>
+        </html>
