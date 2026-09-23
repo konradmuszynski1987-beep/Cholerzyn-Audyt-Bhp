@@ -214,6 +214,7 @@ body{
   cursor:pointer;
   box-shadow:0 10px 25px rgba(0,0,0,.35);
   transition:.12s;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .btn:active{
@@ -407,7 +408,6 @@ body{
 
   </button>
 
-
   <button class="btn fire" onclick="sendFire()">
 
     <div class="icon">🔥</div>
@@ -420,7 +420,6 @@ body{
     </div>
 
   </button>
-
 
   <button class="btn audit" onclick="sendAudit()">
 
@@ -448,12 +447,10 @@ body{
 const TOPIC = "Cholerzyn-Kr2";
 
 
-/*
-========================================
-  WYSYŁANIE NTFY
-  GET /publish
-========================================
-*/
+// ========================================
+// WYSYŁANIE NTFY
+// SPRAWDZONY MECHANIZM
+// ========================================
 
 function publish(message, priority, tags){
 
@@ -463,46 +460,33 @@ function publish(message, priority, tags){
     "/publish?message=" +
     encodeURIComponent(message) +
     "&priority=" +
-    encodeURIComponent(priority) +
+    priority +
     "&tags=" +
     encodeURIComponent(tags) +
     "&cache=no&cb=" +
     Date.now();
 
-  /*
-    Tworzymy zwykły formularz GET.
-    Przeglądarka wykona normalne żądanie
-    do dokładnie tego samego adresu,
-    który wcześniej działał po ręcznym otwarciu.
-  */
+  const img = new Image();
 
-  const form = document.createElement("form");
+  img.onload = function(){
+    console.log("Komunikat wysłany");
+  };
 
-  form.method = "GET";
-  form.action = url;
-  form.target = "_blank";
-  form.style.display = "none";
+  img.onerror = function(){
+    console.log("Żądanie wysłane");
+  };
 
-  document.body.appendChild(form);
-
-  form.submit();
-
-  setTimeout(function(){
-    form.remove();
-  },1000);
+  img.src = url;
 }
 
 
-/*
-========================================
-  STATUS
-========================================
-*/
+// ========================================
+// STATUS
+// ========================================
 
 function showSent(name){
 
-  const box =
-    document.getElementById("statusMessage");
+  const box = document.getElementById("statusMessage");
 
   box.classList.add("sent");
 
@@ -523,14 +507,12 @@ function showSent(name){
 }
 
 
-/*
-========================================
-  ALARM BHP
-  0s
-  2s
-  10s
-========================================
-*/
+// ========================================
+// ALARM BHP
+// 0s
+// 2s
+// 10s
+// ========================================
 
 function sendBHP(){
 
@@ -564,12 +546,9 @@ function sendBHP(){
 }
 
 
-/*
-========================================
-  POŻAR
-  JEDEN KOMUNIKAT
-========================================
-*/
+// ========================================
+// POŻAR
+// ========================================
 
 function sendFire(){
 
@@ -583,12 +562,10 @@ function sendFire(){
 }
 
 
-/*
-========================================
-  AUDYT BHP
-  IDENTYCZNA SEKWENCJA JAK ALARM BHP
-========================================
-*/
+// ========================================
+// AUDYT BHP
+// IDENTYCZNA SEKWENCJA JAK ALARM BHP
+// ========================================
 
 function sendAudit(){
 
@@ -616,4 +593,12 @@ function sendAudit(){
       "🟠 CZY WSZYSCY ODEBRALI AUDYT BHP?",
       5,
       "warning"
-   
+    );
+
+  },10000);
+}
+
+</script>
+
+</body>
+</html>
