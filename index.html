@@ -7,6 +7,7 @@
 <title>Cholerzyn – Panel Bezpieczeństwa</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -15,21 +16,23 @@
 
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(circle at 20% 10%, rgba(255,220,0,.18), transparent 28%),
-    radial-gradient(circle at 90% 80%, rgba(255,70,0,.12), transparent 30%),
-    #101010;
-  color:#fff;
   min-height:100vh;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,210,0,.18),transparent 30%),
+    radial-gradient(circle at 90% 80%,rgba(255,60,0,.12),transparent 30%),
+    #101010;
+  color:white;
 }
+
+/* HEADER */
 
 .header{
   background:#111;
   border-bottom:3px solid #ffd400;
-  padding:18px 20px;
+  padding:17px 20px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 }
 
 .header-title{
@@ -39,93 +42,106 @@ body{
 }
 
 .header-sub{
-  font-size:12px;
-  color:#aaa;
   margin-top:4px;
+  color:#999;
+  font-size:12px;
 }
 
-.status{
+.online{
   display:flex;
   align-items:center;
   gap:8px;
-  font-size:12px;
-  font-weight:bold;
+  font-size:11px;
+  font-weight:800;
 }
 
-.status-dot{
+.online-dot{
   width:10px;
   height:10px;
-  background:#22c55e;
   border-radius:50%;
+  background:#22c55e;
   box-shadow:0 0 12px rgba(34,197,94,.8);
 }
 
+/* CONTAINER */
+
 .container{
-  max-width:900px;
+  max-width:950px;
   margin:auto;
   padding:20px;
 }
 
+/* HERO */
+
 .hero{
+  min-height:260px;
   background:
-    linear-gradient(135deg,#242424,#141414);
+    linear-gradient(135deg,#252525,#151515);
   border:1px solid #333;
-  border-radius:26px;
-  padding:22px;
+  border-radius:25px;
+  overflow:hidden;
   display:flex;
   align-items:center;
-  gap:20px;
-  overflow:hidden;
   position:relative;
-  box-shadow:0 15px 45px rgba(0,0,0,.35);
-}
-
-.hero:after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  background:#ffd400;
-  opacity:.08;
-  border-radius:50%;
-  right:-60px;
-  top:-60px;
+  box-shadow:0 15px 45px rgba(0,0,0,.4);
 }
 
 .hero-text{
-  flex:1;
+  width:58%;
+  padding:28px;
   position:relative;
   z-index:2;
 }
 
 .hero h1{
-  font-size:28px;
+  font-size:34px;
+  line-height:1;
   font-weight:900;
-  line-height:1.05;
 }
 
 .hero p{
-  color:#bbb;
-  margin-top:10px;
+  color:#aaa;
+  margin-top:13px;
   font-size:14px;
-  line-height:1.45;
+  line-height:1.5;
+  max-width:440px;
 }
 
-.dog{
-  width:150px;
-  min-width:150px;
-  position:relative;
-  z-index:2;
+.hero-badge{
+  display:inline-block;
+  margin-top:18px;
+  padding:8px 12px;
+  border-radius:20px;
+  background:#222;
+  border:1px solid #444;
+  color:#ffd400;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
 }
 
-.dog svg{
+.dog-box{
+  position:absolute;
+  right:-5px;
+  bottom:-20px;
+  width:48%;
+  max-width:390px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+}
+
+.dog-box img{
   width:100%;
-  height:auto;
+  max-height:270px;
+  object-fit:contain;
   display:block;
-  filter:drop-shadow(0 10px 15px rgba(0,0,0,.4));
+  filter:drop-shadow(0 15px 15px rgba(0,0,0,.45));
 }
 
-.info{
+/* STATUS */
+
+.status-card{
   margin-top:18px;
   background:#181818;
   border:1px solid #303030;
@@ -133,272 +149,359 @@ body{
   padding:16px;
 }
 
-.info-title{
-  font-size:13px;
-  color:#999;
-  text-transform:uppercase;
+.status-label{
+  color:#777;
+  font-size:11px;
+  font-weight:900;
   letter-spacing:1px;
-  font-weight:bold;
+  text-transform:uppercase;
 }
 
-.info-main{
-  font-size:18px;
-  font-weight:900;
+.status-title{
   margin-top:5px;
+  font-size:19px;
+  font-weight:900;
 }
 
 .status-message{
-  margin-top:14px;
-  padding:13px 15px;
-  border-radius:13px;
+  margin-top:13px;
+  padding:12px;
+  border-radius:12px;
+  text-align:center;
   background:#202020;
   border:1px solid #333;
-  color:#aaa;
+  color:#888;
   font-size:13px;
-  font-weight:bold;
-  text-align:center;
-  transition:.25s;
+  font-weight:800;
+  transition:.2s;
 }
 
 .status-message.sent{
+  color:#6ee7a0;
   background:rgba(34,197,94,.12);
   border-color:#22c55e;
-  color:#6ee7a0;
 }
 
-.buttons{
-  margin-top:20px;
+/* LICZNIKI */
+
+.stats{
+  margin-top:14px;
   display:grid;
-  grid-template-columns:1fr;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.stat{
+  background:#181818;
+  border:1px solid #303030;
+  border-radius:17px;
+  padding:15px;
+  text-align:center;
+}
+
+.stat-number{
+  font-size:30px;
+  font-weight:900;
+  color:#ffd400;
+  line-height:1;
+}
+
+.stat-label{
+  margin-top:7px;
+  color:#aaa;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+
+/* BUTTONS */
+
+.buttons{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
   gap:14px;
 }
 
 .btn{
-  width:100%;
-  min-height:92px;
-  border:none;
+  min-height:190px;
+  border:0;
   border-radius:20px;
-  color:#fff;
-  font-weight:900;
-  cursor:pointer;
+  padding:20px;
+  color:white;
   text-align:left;
-  padding:18px 20px;
-  position:relative;
-  overflow:hidden;
-  transition:transform .12s,filter .12s;
-  box-shadow:0 10px 25px rgba(0,0,0,.3);
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+  transition:.12s;
 }
 
 .btn:active{
-  transform:scale(.98);
+  transform:scale(.97);
 }
 
 .btn:hover{
   filter:brightness(1.08);
 }
 
-.btn-icon{
-  font-size:30px;
-  margin-bottom:7px;
-}
-
-.btn-title{
-  font-size:20px;
-}
-
-.btn-desc{
-  font-size:12px;
-  opacity:.8;
-  margin-top:3px;
-}
-
 .bhp{
-  background:linear-gradient(135deg,#d60000,#920000);
+  background:linear-gradient(145deg,#e00000,#8d0000);
 }
 
 .fire{
-  background:linear-gradient(135deg,#ff5a00,#c92500);
+  background:linear-gradient(145deg,#ff6500,#c52d00);
 }
 
 .audit{
-  background:linear-gradient(135deg,#d9ae00,#8d7100);
+  background:linear-gradient(145deg,#e0b600,#8e7200);
 }
+
+.icon{
+  font-size:40px;
+  margin-bottom:18px;
+}
+
+.btn-title{
+  font-size:21px;
+  font-weight:900;
+}
+
+.btn-desc{
+  margin-top:7px;
+  color:rgba(255,255,255,.78);
+  font-size:12px;
+  line-height:1.4;
+}
+
+/* FOOTER */
 
 .footer{
   text-align:center;
-  color:#666;
-  font-size:11px;
-  padding:22px 10px 12px;
+  color:#555;
+  font-size:10px;
+  padding:22px 5px 10px;
 }
 
-@media(min-width:700px){
-  .buttons{
-    grid-template-columns:repeat(3,1fr);
+/* MOBILE */
+
+@media(max-width:700px){
+
+  .container{
+    padding:14px;
   }
 
-  .btn{
-    min-height:190px;
-  }
-
-  .btn-icon{
-    font-size:40px;
-    margin-bottom:15px;
-  }
-
-  .btn-title{
-    font-size:21px;
-  }
-}
-
-@media(max-width:480px){
   .hero{
-    padding:18px;
+    min-height:220px;
+  }
+
+  .hero-text{
+    width:65%;
+    padding:20px;
   }
 
   .hero h1{
-    font-size:23px;
+    font-size:25px;
   }
 
-  .dog{
-    width:105px;
-    min-width:105px;
+  .hero p{
+    font-size:12px;
   }
+
+  .dog-box{
+    width:45%;
+    right:-8px;
+    bottom:-5px;
+  }
+
+  .buttons{
+    grid-template-columns:1fr;
+  }
+
+  .btn{
+    min-height:105px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:17px;
+  }
+
+  .icon{
+    font-size:32px;
+    margin:0;
+    min-width:42px;
+    text-align:center;
+  }
+
+  .btn-title{
+    font-size:19px;
+  }
+
 }
+
+@media(max-width:420px){
+
+  .header-title{
+    font-size:17px;
+  }
+
+  .hero h1{
+    font-size:22px;
+  }
+
+  .hero-text{
+    width:68%;
+  }
+
+  .dog-box{
+    width:43%;
+  }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
+<!-- HEADER -->
+
 <header class="header">
+
   <div>
-    <div class="header-title">CHOLERZYN</div>
-    <div class="header-sub">PANEL BEZPIECZEŃSTWA</div>
+    <div class="header-title">
+      CHOLERZYN
+    </div>
+
+    <div class="header-sub">
+      PANEL BEZPIECZEŃSTWA
+    </div>
   </div>
 
-  <div class="status">
-    <span class="status-dot"></span>
+  <div class="online">
+    <span class="online-dot"></span>
     SYSTEM ONLINE
   </div>
+
 </header>
+
 
 <main class="container">
 
-  <section class="hero">
 
-    <div class="hero-text">
-      <h1>Centrum<br>Bezpieczeństwa</h1>
+<!-- HERO -->
 
-      <p>
-        Szybkie wysyłanie najważniejszych komunikatów
-        do urządzeń pracowników.
-      </p>
+<section class="hero">
+
+  <div class="hero-text">
+
+    <h1>
+      Centrum<br>
+      Bezpieczeństwa
+    </h1>
+
+    <p>
+      Szybkie wysyłanie najważniejszych
+      komunikatów bezpieczeństwa
+      do urządzeń pracowników.
+    </p>
+
+    <div class="hero-badge">
+      🔔 System alarmowy
     </div>
 
-    <div class="dog">
+  </div>
 
-      <!-- Własna ilustracja psa – bez zewnętrznego pliku -->
-      <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
 
-        <!-- cień -->
-        <ellipse cx="110" cy="202" rx="65" ry="10"
-                 fill="#000" opacity=".35"/>
+  <div class="dog-box">
 
-        <!-- ciało -->
-        <ellipse cx="112" cy="135" rx="57" ry="65"
-                 fill="#e5b51a"/>
+    <img
+      src="https://inpost.pl/sites/default/files/inline-images/Pies_36.png"
+      alt="Von Halsky"
+    >
 
-        <!-- kamizelka -->
-        <path d="M61 122 Q110 103 161 122 L154 167
-                 Q110 181 68 167Z"
-              fill="#171717"/>
+  </div>
 
-        <path d="M70 126 Q110 111 152 126"
-              stroke="#ffd400"
-              stroke-width="9"
-              fill="none"/>
+</section>
 
-        <!-- głowa -->
-        <ellipse cx="110" cy="80" rx="58" ry="54"
-                 fill="#f1c52b"/>
 
-        <!-- uszy -->
-        <path d="M62 48 Q25 30 34 91 Q42 112 68 91Z"
-              fill="#9a7210"/>
+<!-- STATUS -->
 
-        <path d="M158 48 Q195 30 186 91 Q178 112 152 91Z"
-              fill="#9a7210"/>
+<section class="status-card">
 
-        <!-- pysk -->
-        <ellipse cx="110" cy="92" rx="35" ry="29"
-                 fill="#f6d66b"/>
+  <div class="status-label">
+    Status komunikacji
+  </div>
 
-        <!-- oczy -->
-        <ellipse cx="88" cy="72" rx="8" ry="10"
-                 fill="#171717"/>
+  <div class="status-title">
+    Gotowy do wysłania
+  </div>
 
-        <ellipse cx="132" cy="72" rx="8" ry="10"
-                 fill="#171717"/>
+  <div
+    id="statusMessage"
+    class="status-message"
+  >
+    Wybierz rodzaj komunikatu poniżej.
+  </div>
 
-        <!-- błysk -->
-        <circle cx="91" cy="69" r="2.5" fill="#fff"/>
-        <circle cx="135" cy="69" r="2.5" fill="#fff"/>
+</section>
 
-        <!-- nos -->
-        <ellipse cx="110" cy="91" rx="13" ry="9"
-                 fill="#171717"/>
 
-        <!-- uśmiech -->
-        <path d="M110 98 Q110 112 98 114"
-              stroke="#171717"
-              stroke-width="4"
-              fill="none"
-              stroke-linecap="round"/>
+<!-- LICZNIKI -->
 
-        <path d="M110 98 Q110 112 122 114"
-              stroke="#171717"
-              stroke-width="4"
-              fill="none"
-              stroke-linecap="round"/>
+<section class="stats">
 
-        <!-- łapy -->
-        <ellipse cx="73" cy="169" rx="17" ry="31"
-                 fill="#e5b51a"/>
+  <div class="stat">
 
-        <ellipse cx="147" cy="169" rx="17" ry="31"
-                 fill="#e5b51a"/>
-
-        <!-- łapy dół -->
-        <ellipse cx="73" cy="190" rx="18" ry="9"
-                 fill="#b88c10"/>
-
-        <ellipse cx="147" cy="190" rx="18" ry="9"
-                 fill="#b88c10"/>
-
-      </svg>
-
+    <div
+      id="ackCount"
+      class="stat-number"
+    >
+      0
     </div>
 
-  </section>
-
-  <section class="info">
-
-    <div class="info-title">Status komunikacji</div>
-
-    <div class="info-main">
-      Gotowy do wysłania
+    <div class="stat-label">
+      ODEBRAŁO
     </div>
 
-    <div id="statusMessage" class="status-message">
-      Wybierz rodzaj komunikatu poniżej.
+  </div>
+
+
+  <div class="stat">
+
+    <div
+      id="deviceCount"
+      class="stat-number"
+    >
+      0
     </div>
 
-  </section>
+    <div class="stat-label">
+      URZĄDZENIA
+    </div>
 
-  <section class="buttons">
+  </div>
 
-    <button class="btn bhp" onclick="sendBHP()">
+</section>
 
-      <div class="btn-icon">🚨</div>
+
+<!-- BUTTONS -->
+
+<section class="buttons">
+
+
+  <!-- BHP -->
+
+  <button
+    class="btn bhp"
+    onclick="sendBHP()"
+  >
+
+    <div class="icon">
+      🚨
+    </div>
+
+    <div>
 
       <div class="btn-title">
         ALARM BHP
@@ -408,12 +511,23 @@ body{
         Natychmiastowy alarm bezpieczeństwa
       </div>
 
-    </button>
+    </div>
+
+  </button>
 
 
-    <button class="btn fire" onclick="sendFire()">
+  <!-- POŻAR -->
 
-      <div class="btn-icon">🔥</div>
+  <button
+    class="btn fire"
+    onclick="sendFire()"
+  >
+
+    <div class="icon">
+      🔥
+    </div>
+
+    <div>
 
       <div class="btn-title">
         UWAGA! POŻAR
@@ -423,12 +537,23 @@ body{
         Pilny komunikat pożarowy
       </div>
 
-    </button>
+    </div>
+
+  </button>
 
 
-    <button class="btn audit" onclick="sendAudit()">
+  <!-- AUDYT -->
 
-      <div class="btn-icon">⚠️</div>
+  <button
+    class="btn audit"
+    onclick="sendAudit()"
+  >
+
+    <div class="icon">
+      ⚠️
+    </div>
+
+    <div>
 
       <div class="btn-title">
         AUDYT BHP
@@ -438,27 +563,34 @@ body{
         Komunikat dotyczący kontroli BHP
       </div>
 
-    </button>
+    </div>
 
-  </section>
+  </button>
 
-  <div class="footer">
-    Panel wewnętrzny • Cholerzyn • System powiadomień NTFY
-  </div>
+
+</section>
+
+
+<div class="footer">
+  Panel wewnętrzny • Cholerzyn • NTFY
+</div>
+
 
 </main>
 
 
 <script>
 
+
+/* ========================================
+   NTFY
+   TEN MECHANIZM ZOSTAWIAMY BEZ ZMIAN
+======================================== */
+
 const TOPIC = "Cholerzyn-Kr2";
 
 let activeRequests = [];
 
-
-/* =========================
-   WYSYŁANIE NTFY
-========================= */
 
 function publish(message, priority, tags){
 
@@ -474,49 +606,51 @@ function publish(message, priority, tags){
     "&cache=no&cb=" +
     Date.now();
 
-  fetch(url, {
-    method: "GET",
-    mode: "no-cors",
-    cache: "no-store",
-    keepalive: true
-  }).catch(function(error){
-    console.log("NTFY:", error);
-  });
-
-  console.log("Wysłano żądanie NTFY");
-  }
 
   const img = new Image();
 
+
   img.onload = function(){
+
     console.log("Komunikat wysłany");
+
   };
 
+
   img.onerror = function(){
+
     console.log("Żądanie wysłane");
+
   };
+
 
   img.src = url;
 
+
   activeRequests.push(img);
+
 }
 
 
-/* =========================
-   STATUS NA EKRANIE
-========================= */
+/* ========================================
+   STATUS
+======================================== */
 
-function showSent(text){
+function showSent(name){
 
-  const box = document.getElementById("statusMessage");
+  const box =
+    document.getElementById("statusMessage");
+
 
   box.classList.add("sent");
+
 
   box.innerHTML =
     "🟢 KOMUNIKAT WYSŁANY<br>" +
     "<span style='font-weight:normal'>" +
-    text +
+    name +
     "</span>";
+
 
   setTimeout(function(){
 
@@ -526,25 +660,28 @@ function showSent(text){
       "Wybierz rodzaj komunikatu poniżej.";
 
   },5000);
+
 }
 
 
-/* =========================
+/* ========================================
    ALARM BHP
-   0s
-   2s
-   10s
-========================= */
+   0 SEKUND
+   2 SEKUNDY
+   10 SEKUND
+======================================== */
 
 function sendBHP(){
 
   showSent("ALARM BHP");
+
 
   publish(
     "🚨 ALARM BHP — NATYCHMIAST SPRAWDŹ KOMUNIKAT",
     5,
     "rotating_light,warning"
   );
+
 
   setTimeout(function(){
 
@@ -570,14 +707,15 @@ function sendBHP(){
 }
 
 
-/* =========================
+/* ========================================
    POŻAR
    JEDEN KOMUNIKAT
-========================= */
+======================================== */
 
 function sendFire(){
 
   showSent("UWAGA! POŻAR");
+
 
   publish(
     "🔥 UWAGA! POŻAR — SPRAWDŹ KOMUNIKAT",
@@ -588,15 +726,17 @@ function sendFire(){
 }
 
 
-/* =========================
+/* ========================================
    AUDYT BHP
-   IDENTYCZNA SEKWENCJA
-   JAK ALARM BHP
-========================= */
+   IDENTYCZNA SEKWENCJA JAK ALARM BHP
+======================================== */
 
 function sendAudit(){
 
   showSent("AUDYT BHP");
+
+
+  /* 0 SEKUND */
 
   publish(
     "⚠️ AUDYT BHP — SPRAWDŹ KOMUNIKAT",
@@ -604,6 +744,8 @@ function sendAudit(){
     "warning"
   );
 
+
+  /* 2 SEKUNDY */
 
   setTimeout(function(){
 
@@ -615,6 +757,8 @@ function sendAudit(){
 
   },2000);
 
+
+  /* 10 SEKUND */
 
   setTimeout(function(){
 
@@ -628,7 +772,8 @@ function sendAudit(){
 
 }
 
+
 </script>
 
 </body>
-        </html>
+</html>
