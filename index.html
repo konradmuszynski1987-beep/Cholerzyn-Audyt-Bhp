@@ -396,42 +396,33 @@ body{
 <section class="buttons">
 
   <button class="btn bhp" onclick="sendBHP()">
-
     <div class="icon">🚨</div>
-
     <div>
       <div class="btn-title">ALARM BHP</div>
       <div class="btn-desc">
         Natychmiastowy alarm bezpieczeństwa
       </div>
     </div>
-
   </button>
 
   <button class="btn fire" onclick="sendFire()">
-
     <div class="icon">🔥</div>
-
     <div>
       <div class="btn-title">UWAGA! POŻAR</div>
       <div class="btn-desc">
         Pilny komunikat pożarowy
       </div>
     </div>
-
   </button>
 
   <button class="btn audit" onclick="sendAudit()">
-
     <div class="icon">⚠️</div>
-
     <div>
       <div class="btn-title">AUDYT BHP</div>
       <div class="btn-desc">
         Komunikat dotyczący kontroli BHP
       </div>
     </div>
-
   </button>
 
 </section>
@@ -448,35 +439,41 @@ const TOPIC = "Cholerzyn-Kr2";
 
 
 // ========================================
-// WYSYŁANIE NTFY
-// SPRAWDZONY MECHANIZM
+// NTFY
+// Oficjalny endpoint POST
 // ========================================
 
 function publish(message, priority, tags){
 
-  const url =
-    "https://ntfy.sh/" +
-    TOPIC +
-    "/publish?message=" +
-    encodeURIComponent(message) +
-    "&priority=" +
-    priority +
-    "&tags=" +
-    encodeURIComponent(tags) +
-    "&cache=no&cb=" +
-    Date.now();
+  const url = "https://ntfy.sh/" + TOPIC;
 
-  const img = new Image();
+  return fetch(url, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-store",
+    headers: {
+      "Content-Type": "text/plain",
+      "Priority": String(priority),
+      "Tags": tags
+    },
+    body: message
+  })
+  .then(function(response){
 
-  img.onload = function(){
-    console.log("Komunikat wysłany");
-  };
+    if(!response.ok){
+      throw new Error("NTFY HTTP " + response.status);
+    }
 
-  img.onerror = function(){
-    console.log("Żądanie wysłane");
-  };
+    console.log("NTFY: wysłano", message);
 
-  img.src = url;
+    return true;
+  })
+  .catch(function(error){
+
+    console.error("NTFY ERROR:", error);
+
+    return false;
+  });
 }
 
 
@@ -509,9 +506,6 @@ function showSent(name){
 
 // ========================================
 // ALARM BHP
-// 0s
-// 2s
-// 10s
 // ========================================
 
 function sendBHP(){
@@ -564,7 +558,6 @@ function sendFire(){
 
 // ========================================
 // AUDYT BHP
-// IDENTYCZNA SEKWENCJA JAK ALARM BHP
 // ========================================
 
 function sendAudit(){
