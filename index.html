@@ -474,6 +474,18 @@ function publish(message, priority, tags){
     "&cache=no&cb=" +
     Date.now();
 
+  fetch(url, {
+    method: "GET",
+    mode: "no-cors",
+    cache: "no-store",
+    keepalive: true
+  }).catch(function(error){
+    console.log("NTFY:", error);
+  });
+
+  console.log("Wysłano żądanie NTFY");
+  }
+
   const img = new Image();
 
   img.onload = function(){
