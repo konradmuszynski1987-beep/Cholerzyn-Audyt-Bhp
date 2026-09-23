@@ -169,7 +169,6 @@ button:active {
     </div>
   </div>
 
-
   <button class="bhp" onclick="sendBhp()">
     🚨 ALARM BHP
   </button>
@@ -182,13 +181,11 @@ button:active {
     ⚠️ AUDYT BHP
   </button>
 
-
   <div id="ackBox" class="ack">
     <strong>✅ ODEBRANO</strong>
     <br><br>
     Potwierdzenie zostało zapisane.
   </div>
-
 
   <div class="info">
     Po wysłaniu komunikatu użytkownik otrzyma powiadomienie
@@ -202,28 +199,22 @@ button:active {
 
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
-/* =====================================================
-   KONFIGURACJA
-   ===================================================== */
 
 const TOPIC = "Cholerzyn-Kr2";
 
 const SUPABASE_URL =
   "https://mleqpnxljfzazcyddolk.supabase.co";
 
-/*
-   TUTAJ PÓŹNIEJ WKLEISZ SWÓJ KLUCZ:
 
-   sb_publishable_....................
-*/
+/* =====================================================
+   TUTAJ WKLEJ SWÓJ KLUCZ SUPABASE
+   ===================================================== */
 
 const SUPABASE_PUBLISHABLE_KEY =
-  sb_publishable_;
+  "TU_WKLEJ_PUBLISHABLE_KEY";
 
 
 const supabaseClient =
@@ -234,7 +225,7 @@ const supabaseClient =
 
 
 /* =====================================================
-   URZĄDZENIE
+   IDENTYFIKACJA URZĄDZENIA
    ===================================================== */
 
 function getDeviceId() {
@@ -274,7 +265,7 @@ function getDeviceId() {
 
 
 /* =====================================================
-   NUMER ZDARZENIA
+   ID ALARMU
    ===================================================== */
 
 function createEventId() {
@@ -291,7 +282,7 @@ function createEventId() {
 
 
 /* =====================================================
-   ZAPISANIE WYSŁANEGO ALARMU
+   ZAPIS WYSŁANEGO ALARMU
    ===================================================== */
 
 async function saveSentEvent(
@@ -328,7 +319,7 @@ async function saveSentEvent(
 
 
 /* =====================================================
-   ZAPISANIE POTWIERDZENIA
+   ZAPIS ODEBRANIA
    ===================================================== */
 
 async function saveAcknowledgement(
@@ -360,7 +351,7 @@ async function saveAcknowledgement(
     if (result.error) {
 
       console.log(
-        "Potwierdzenie:",
+        "Błąd potwierdzenia:",
         result.error
       );
 
@@ -375,7 +366,7 @@ async function saveAcknowledgement(
   } catch (error) {
 
     console.log(
-      "Błąd potwierdzenia:",
+      "Błąd:",
       error
     );
 
@@ -385,8 +376,7 @@ async function saveAcknowledgement(
 
 
 /* =====================================================
-   SPRAWDZENIE CZY STRONA ZOSTAŁA OTWARTA
-   Z PRZYCISKU ODEBRANO
+   SPRAWDZENIE ODEBRANIA
    ===================================================== */
 
 function checkAcknowledgement() {
@@ -411,7 +401,7 @@ function checkAcknowledgement() {
 
 
 /* =====================================================
-   POKAZANIE "ODEBRANO"
+   POKAZANIE ODEBRANO
    ===================================================== */
 
 function showAck() {
@@ -460,8 +450,6 @@ async function loadStats() {
       result.data || [];
 
 
-    /* Wysłane alarmy */
-
     const sent =
       rows.filter(
         row =>
@@ -469,16 +457,12 @@ async function loadStats() {
       );
 
 
-    /* Potwierdzenia */
-
     const acks =
       rows.filter(
         row =>
           row.event_type === "ack"
       );
 
-
-    /* Unikalne urządzenia */
 
     const devices =
       new Set(
